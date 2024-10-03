@@ -5,6 +5,7 @@ function App() {
     <h1>
       todo.
       <p>{import.meta.env.VITE_EXAMPLE_ENV_VAR}</p>
+      Coming Soon.....!
     </h1>
   );
 }
