@@ -1,11 +1,15 @@
 :root {
   --darkModeBackground: #121215;
-  --lightmodeBackground: #e3effa;
+  --lightModeBackground: #e3effa;
+  --darkModeHighlightFontColor: #815ef7;
+  --darkModeFontColor: white;
 }
 body {
-  background-color: var(--lightmodeBackground);
+  font-family: "Lexend Deca", sans-serif;
+  background-color: var(--darkModeBackground);
+  color: var(--darkModeFontColor);
 }
 
-.dark-mode {
-  background-color: var(--darkModeBackground);
+.logo-do {
+  color: var(--darkModeHighlightFontColor);
 }

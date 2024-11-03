@@ -1,14 +1,15 @@
 import "./App.css";
+import Content from "./Components/Content/Content";
+import Header from "./Components/Header/Header";
+import SideBar from "./Components/SideBar/SideBar";
 
 function App() {
   return (
-    <>
-      <h1>
-        todo.
-        <p>{import.meta.env.VITE_EXAMPLE_ENV_VAR}</p>
-        Coming Soon.....!
-      </h1>
-    </>
+    <main>
+      <Header />
+      <SideBar />
+      <Content />
+    </main>
   );
 }
 
