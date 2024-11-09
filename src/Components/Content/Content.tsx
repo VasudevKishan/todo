@@ -1,5 +1,5 @@
 const Content = () => {
-  return <div>Content</div>;
+  return <div className="content roundedBorder">Content</div>;
 };
 
 export default Content;

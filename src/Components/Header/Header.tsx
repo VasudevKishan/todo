@@ -1,9 +1,9 @@
 const Header = () => {
-  return (
-    <h1>
-      to<span className="logo-do">do.</span>
-    </h1>
-  );
+    return (
+        <nav className="header">
+            to<span className="logo-do">do.</span>
+        </nav>
+    );
 };
 
 export default Header;

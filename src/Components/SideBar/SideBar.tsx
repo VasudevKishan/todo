@@ -1,5 +1,5 @@
 const SideBar = () => {
-  return <div>SideBar</div>;
+    return <div className="sidebar roundedBorder">SideBar</div>;
 };
 
 export default SideBar;

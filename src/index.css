@@ -1,15 +1,69 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-weight: 400;
+}
+
 :root {
-  --darkModeBackground: #121215;
-  --lightModeBackground: #e3effa;
-  --darkModeHighlightFontColor: #815ef7;
-  --darkModeFontColor: white;
+    --darkModeBackground: #121215;
+    --lightModeBackground: #e3effa;
+    --darkModeHighlightFontColor: #815ef7;
+    --darkModeFontColor: white;
 }
 body {
-  font-family: "Lexend Deca", sans-serif;
-  background-color: var(--darkModeBackground);
-  color: var(--darkModeFontColor);
+    font-family: "Lexend Deca", sans-serif;
+    background-color: var(--darkModeBackground);
+    color: var(--darkModeFontColor);
 }
 
 .logo-do {
-  color: var(--darkModeHighlightFontColor);
+    color: var(--darkModeHighlightFontColor);
+}
+
+main {
+    justify-content: center;
+    align-items: center;
+    padding-top: 5vh;
+    padding-left: 15vw;
+    padding-right: 15vw;
+    display: grid;
+    grid-template-columns: 2;
+    grid-template-rows: 2;
+    grid-template-areas:
+        "   header   header   "
+        "   sidebar   content   ";
+
+    gap: 20px;
+}
+
+.header {
+    grid-area: header;
+    height: 130px;
+    align-content: center;
+    font-size: 4rem;
+    font-weight: bold;
+}
+.sidebar {
+    /* grid-column: 1;
+    grid-row: 2; */
+    width: 20vw;
+    background-color: #18181c;
+    min-height: 60vh;
+    grid-area: sidebar;
+    padding: 20px;
+}
+
+.roundedBorder {
+    border-radius: 20px;
+}
+
+.content {
+    /* grid-column: 2;
+    grid-row: 2; */
+    width: 40vw;
+    background-color: #18181c;
+    min-height: 60vh;
+    grid-area: content;
+    padding: 20px;
 }
