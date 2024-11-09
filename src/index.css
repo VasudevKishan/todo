@@ -15,6 +15,7 @@ body {
     font-family: "Lexend Deca", sans-serif;
     background-color: var(--darkModeBackground);
     color: var(--darkModeFontColor);
+    min-height: 100vh;
 }
 
 .logo-do {
@@ -28,8 +29,8 @@ main {
     padding-left: 15vw;
     padding-right: 15vw;
     display: grid;
-    grid-template-columns: 2;
-    grid-template-rows: 2;
+    grid-template-columns: 15vw 1fr;
+    grid-template-rows: auto auto;
     grid-template-areas:
         "   header   header   "
         "   sidebar   content   ";
@@ -40,14 +41,20 @@ main {
 .header {
     grid-area: header;
     height: 130px;
+    display: flex;
+    justify-content: space-between;
     align-content: center;
     font-size: 4rem;
     font-weight: bold;
+    padding-top: 2rem;
+    padding-bottom: 5rem;
+}
+.sidebarToggleButton {
+    height: 100%;
+    width: 3vw;
+    display: none;
 }
 .sidebar {
-    /* grid-column: 1;
-    grid-row: 2; */
-    width: 20vw;
     background-color: #18181c;
     min-height: 60vh;
     grid-area: sidebar;
@@ -61,9 +68,24 @@ main {
 .content {
     /* grid-column: 2;
     grid-row: 2; */
-    width: 40vw;
+    /* width: 40vw; */
     background-color: #18181c;
     min-height: 60vh;
     grid-area: content;
     padding: 20px;
+}
+
+@media (max-width: 800px) {
+    main {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "   header    "
+            "   content   ";
+    }
+    .sidebar {
+        display: none;
+    }
+    .sidebarToggleButton {
+        display: block;
+    }
 }
