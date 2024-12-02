@@ -1,14 +1,16 @@
-const Header = () => {
-    // const sidebar: HTMLElement | null = document.getElementById("sidebar");
-    // function toggleSideBar(): void {
-    //     sidebar?.classList.toggle("show");
-    // }
+interface HeaderProps {
+    onToggleSidebar: () => void;
+}
+
+const Header: React.FC<HeaderProps> = ({onToggleSidebar}) => {
     return (
         <nav className="header">
             <span>
                 to<span className="logo-do">do.</span>
             </span>
-            <button className="sidebarToggleButton">Menu</button>
+            <button className="sidebarToggleButton" onClick={onToggleSidebar}>
+                Menu
+            </button>
         </nav>
     );
 };

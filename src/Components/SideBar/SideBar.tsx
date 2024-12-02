@@ -1,8 +1,8 @@
-const SideBar = () => {
+const SideBar: React.FC<{className?: string}> = ({className = ""}) => {
     return (
-        <div className="sidebar roundedBorder" id="sidebar">
+        <aside className={`sidebar roundedBorder ${className}`} id="sidebar">
             SideBar
-        </div>
+        </aside>
     );
 };
 
