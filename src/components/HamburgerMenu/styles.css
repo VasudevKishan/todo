@@ -1,0 +1,23 @@
+.icon {
+    background-color: inherit;
+    width: 40px;
+    height: 55px;
+    border: 0;
+}
+
+.icon .line {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--grad-base);
+    height: 5px;
+    width: 40px;
+    margin: 10px 0;
+    transition: transform 0.2s linear;
+}
+
+.icon.active .line1 {
+    transform: rotate(-45deg) translateY(10px);
+}
+.icon.active .line2 {
+    transform: rotate(45deg) translateY(-10px);
+}
