@@ -1,11 +1,14 @@
-import React from "react";
+import "./styles.css";
+import HamburgerMenu from "../components/HamburgerMenu";
 
 const Header: React.FC = () => {
     return (
-        <div>
-            <h1>Header</h1>
-            {/* Add your components and logic here */}
-        </div>
+        <nav>
+            <div>
+                to<span>do.</span>
+            </div>
+            <HamburgerMenu />
+        </nav>
     );
 };
 

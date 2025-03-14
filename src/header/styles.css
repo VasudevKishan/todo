@@ -1,0 +1,11 @@
+nav {
+    width: 100vw;
+    display: flex;
+    font-size: 5rem;
+    align-items: center;
+    padding: 40px 50px;
+    justify-content: space-between;
+}
+nav span {
+    color: var(--grad-base);
+}
