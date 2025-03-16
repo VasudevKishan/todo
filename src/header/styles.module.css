@@ -4,6 +4,8 @@
     font-size: 5rem;
     align-items: center;
     padding: 40px 50px;
+    padding-left: 15%;
+    padding-right: 15%;
     justify-content: space-between;
 }
 .nav .highlight {
