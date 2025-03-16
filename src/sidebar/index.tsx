@@ -1,10 +1,10 @@
 import React from "react";
+import styles from "./styles.module.css";
 
 const SideBar: React.FC = () => {
     return (
-        <div>
+        <div className={styles.container}>
             <h1>Side Bar</h1>
-            {/* Add your components and logic here */}
         </div>
     );
 };
