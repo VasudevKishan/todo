@@ -1,4 +1,4 @@
-nav {
+.nav {
     width: 100vw;
     display: flex;
     font-size: 5rem;
@@ -6,6 +6,6 @@ nav {
     padding: 40px 50px;
     justify-content: space-between;
 }
-nav span {
+.nav .highlight {
     color: var(--grad-base);
 }

@@ -1,11 +1,11 @@
-import "./styles.css";
+import styles from "./styles.module.css";
 import HamburgerMenu from "../components/HamburgerMenu";
 
 const Header: React.FC = () => {
     return (
-        <nav>
+        <nav className={styles.nav}>
             <div>
-                to<span>do.</span>
+                to<span className={styles.highlight}>do.</span>
             </div>
             <HamburgerMenu />
         </nav>
