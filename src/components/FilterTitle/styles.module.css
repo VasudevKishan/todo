@@ -1,0 +1,23 @@
+.button {
+    background: transparent;
+    color: var(--dk-subtext);
+    border: 0;
+    border-radius: 8px;
+    display: flex;
+    font-size: 14px;
+    align-items: center;
+    padding: 8px;
+    font-weight: 400;
+}
+
+.button.active {
+    background-color: var(--component);
+}
+
+.button:active {
+    outline: 0;
+}
+
+.button .icon {
+    margin-right: 0.5rem;
+}
