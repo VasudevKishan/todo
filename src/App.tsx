@@ -1,13 +1,16 @@
 import "./App.css";
 import Header from "./header";
 import ContentContainer from "./content-container";
+import {ThemeProvider} from "./context/ThemeContext";
 
 function App() {
     return (
-        <>
-            <Header />
-            <ContentContainer />
-        </>
+        <ThemeProvider>
+            <>
+                <Header />
+                <ContentContainer />
+            </>
+        </ThemeProvider>
     );
 }
 
