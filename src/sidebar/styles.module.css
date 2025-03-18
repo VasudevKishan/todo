@@ -5,6 +5,8 @@
     width: 30%;
     min-width: 150px;
     padding: 25px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
+        rgba(0, 0, 0, 0.1) 0px 2px 4px 0px;
 }
 
 .filterTitleGroup {
