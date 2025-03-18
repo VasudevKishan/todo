@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import styles from "./styles.module.css";
 import FilterTitle from "../components/FilterTitle";
 import Toggle from "../components/Toggle";
-import {useTheme} from "../context/ThemeContext";
+import {useTheme} from "../hooks/useTheme";
 
 type filterTypes = "All" | "Starred";
 

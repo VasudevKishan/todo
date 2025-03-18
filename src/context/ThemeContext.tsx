@@ -1,19 +1,9 @@
-import React, {
-    createContext,
-    useState,
-    useContext,
-    ReactNode,
-    useEffect,
-} from "react";
+import React, {createContext, useState, ReactNode, useEffect} from "react";
+import {Theme, ThemeContextProps} from "./helper";
 
-type Theme = "light" | "dark";
-
-interface ThemeContextProps {
-    theme: Theme;
-    toggleTheme: () => void;
-}
-
-const ThemeContext = createContext<ThemeContextProps | undefined>(undefined);
+export const ThemeContext = createContext<ThemeContextProps | undefined>(
+    undefined
+);
 
 export const ThemeProvider: React.FC<{children: ReactNode}> = ({children}) => {
     const [theme, setTheme] = useState<Theme>("dark");
@@ -30,12 +20,4 @@ export const ThemeProvider: React.FC<{children: ReactNode}> = ({children}) => {
             {children}
         </ThemeContext.Provider>
     );
-};
-
-export const useTheme = (): ThemeContextProps => {
-    const context = useContext(ThemeContext);
-    if (!context) {
-        throw new Error("UseTheme must be used within context provider");
-    }
-    return context;
 };
