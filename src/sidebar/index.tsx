@@ -1,10 +1,13 @@
 import React, {useState} from "react";
 import styles from "./styles.module.css";
 import FilterTitle from "../components/FilterTitle";
+import Toggle from "../components/Toggle";
+import {useTheme} from "../context/ThemeContext";
 
 type filterTypes = "All" | "Starred";
 
 const SideBar: React.FC = () => {
+    const {toggleTheme} = useTheme();
     const [activeFilter, setActiveFilter] = useState<filterTypes>("All");
 
     const handleFilterClick = (filterName: filterTypes) => {
@@ -16,7 +19,7 @@ const SideBar: React.FC = () => {
             <div className={styles.filters}>
                 <div className={styles.filterTitleGroup}>
                     <h2>Filters</h2>
-                    <input type="checkbox" />
+                    <Toggle action={toggleTheme} />
                 </div>
                 <div className={styles.filterList}>
                     <FilterTitle
