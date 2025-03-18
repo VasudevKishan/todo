@@ -13,9 +13,10 @@ const Toggle: React.FC<ToggleProps> = ({checkboxLabel = "", action}) => {
                 type="checkbox"
                 className={styles.toggle}
                 onChange={action}
+                id="toggle"
             />
-            <label htmlFor={styles.toggle} className="label">
-                <div className={styles.ball}></div>
+            <label htmlFor="toggle" className={styles.label}>
+                <div className={`${styles.ball} ${styles.dark}`}></div>
             </label>
             <span>{checkboxLabel}</span>
         </div>
