@@ -1,0 +1,29 @@
+.btn {
+    color: var(--dk-text);
+    border: 0;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background: linear-gradient(
+        160deg,
+        var(--gradient-1) 0%,
+        var(--gradient-2) 100%
+    );
+    padding: 10px 25px;
+    border-radius: 25px;
+}
+
+.btn-primary:hover {
+    transform: scale(1.02);
+}
+
+.btn-secondary {
+    background: transparent;
+    outline: 0;
+    padding: 15px 0;
+}
+
+.btn:active {
+    outline: 0;
+}
