@@ -3,13 +3,18 @@ import styles from "./styles.module.css";
 import {ActionButton} from "../components/ActionButton/ActionButton";
 
 import {useCurrentAction} from "../hooks/useCurrentAction";
+import {useTasks} from "../hooks/useTasks";
 
 const TodoContainer: React.FC = forwardRef<HTMLDivElement>((_, ref) => {
     const {changeAction} = useCurrentAction();
+    // const {tasks, addTask, removeTask, toggleTaskCompletion, toggleStar} =
+    //     useTasks();
+
+    const {tasks} = useTasks();
 
     return (
         <main className={styles.container} ref={ref}>
-            <div className={`slide ${styles.slide} ${styles["add-task"]}`}>
+            <div className={` ${styles.slide} ${styles["add-task"]}`}>
                 Add Task
                 <ActionButton
                     className={styles.backBtn}
@@ -33,8 +38,19 @@ const TodoContainer: React.FC = forwardRef<HTMLDivElement>((_, ref) => {
                 </ActionButton>
             </div>
 
-            <div className={` slide ${styles.slide} ${styles["view-task"]}`}>
-                View Tasks
+            <div className={`${styles.slide} ${styles["view-task"]}`}>
+                <h2>Tasks</h2>
+                {tasks.map((task) => (
+                    <>
+                        <span>{task.title}</span>
+                        <br />
+                        <span>{task.description}</span>
+                        <br />
+                        <span>{task.starred}</span>
+                        <br />
+                        <span>{task.completed}</span>
+                    </>
+                ))}
                 <ActionButton
                     varient="primary"
                     onClick={() => changeAction("edit")}
@@ -44,7 +60,7 @@ const TodoContainer: React.FC = forwardRef<HTMLDivElement>((_, ref) => {
                 </ActionButton>
             </div>
 
-            <div className={`slide ${styles.slide} ${styles["task-detail"]}`}>
+            <div className={`${styles.slide} ${styles["task-detail"]}`}>
                 Task Detail
                 <ActionButton
                     className={styles.backBtn}
