@@ -2,15 +2,18 @@ import "./App.css";
 import Header from "./header";
 import ContentContainer from "./content-container";
 import {ThemeProvider} from "./context/ThemeContext";
+import {TaskProvider} from "./context/TaskContext";
 
 function App() {
     return (
-        <ThemeProvider>
-            <>
-                <Header />
-                <ContentContainer />
-            </>
-        </ThemeProvider>
+        <TaskProvider>
+            <ThemeProvider>
+                <>
+                    <Header />
+                    <ContentContainer />
+                </>
+            </ThemeProvider>
+        </TaskProvider>
     );
 }
 
