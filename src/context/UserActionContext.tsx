@@ -17,18 +17,18 @@ export const UserActionProvider: React.FC<{children: React.ReactNode}> = ({
 
     useEffect(() => {
         if (containerRef.current) {
-            const slides = containerRef.current.querySelectorAll(".slide");
-            console.log("slidees found: ", slides);
+            const slides = containerRef.current.querySelectorAll("& > div");
+            // console.log("slidees found: ", slides);
 
             slides.forEach((element) => {
-                console.log("Before applying transform ", element);
+                // console.log("Before applying transform ", element);
                 (element as HTMLElement).style.transform =
                     action === "view"
                         ? "translateX(-100%)"
                         : action === "edit"
                         ? "translateX(0)"
                         : "translateX(-200%)";
-                console.log("After applying transform ", element);
+                // console.log("After applying transform ", element);
             });
         }
     }, [action]);

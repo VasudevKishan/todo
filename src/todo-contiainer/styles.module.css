@@ -12,6 +12,12 @@
     /* transform: translateX(-100%); */
 }
 
+h2 {
+    color: var(--primary);
+    font-weight: 400;
+    font-size: 1.75rem;
+}
+
 .slide {
     padding: 25px;
     /* border: 2px solid red; */
