@@ -11,3 +11,20 @@ export interface UserActionContextProps {
     action: UserAction;
     changeAction: (userAction: UserAction) => void;
 }
+
+export interface Task {
+    id: number;
+    title: string;
+    description: string;
+    completed: boolean;
+    starred: boolean;
+}
+
+export interface TaskContextProps {
+    tasks: Task[];
+    addTask: (task: Task) => void;
+    removeTask: (id: number) => void;
+    toggleTaskCompletion: (id: number) => void;
+    toggleStar: (id: number) => void;
+    generateUniqueId: () => number;
+}
