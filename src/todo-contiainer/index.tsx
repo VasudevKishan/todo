@@ -1,14 +1,14 @@
-import React from "react";
+import React, {forwardRef} from "react";
 import styles from "./styles.module.css";
 import {ActionButton} from "../components/ActionButton/ActionButton";
 
 import {useCurrentAction} from "../hooks/useCurrentAction";
 
-const TodoContainer: React.FC = () => {
+const TodoContainer: React.FC = forwardRef<HTMLDivElement>((_, ref) => {
     const {changeAction} = useCurrentAction();
 
     return (
-        <main className={styles.container}>
+        <main className={styles.container} ref={ref}>
             <div className={`slide ${styles.slide} ${styles["add-task"]}`}>
                 Add Task
                 <ActionButton
@@ -56,6 +56,6 @@ const TodoContainer: React.FC = () => {
             </div>
         </main>
     );
-};
+});
 
 export default TodoContainer;
