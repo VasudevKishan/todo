@@ -4,9 +4,25 @@
 
 .item {
     width: 100%;
-    height: 25px;
+    height: 2.5rem;
     background: var(--component);
+    margin-bottom: 0.75rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
 }
 
 .icon {
+    position: absolute;
+    right: 0;
+    font-size: 1.1rem;
+    margin: 1rem;
+    color: var(--dk-subtext);
+}
+
+.check {
+    font-size: 1.1rem;
+    margin: 1rem;
+    color: var(--dk-subtext);
 }

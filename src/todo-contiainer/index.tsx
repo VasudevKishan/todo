@@ -53,7 +53,7 @@ const TodoContainer: React.FC = forwardRef<HTMLDivElement>((_, ref) => {
                     </>
                 ))} */}
 
-                <ul>
+                <ul className={styles.TaskList}>
                     {tasks.map((task) => (
                         <li>
                             <TaskItem task={task} />
