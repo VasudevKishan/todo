@@ -4,6 +4,7 @@ import {ActionButton} from "../components/ActionButton/ActionButton";
 
 import {useCurrentAction} from "../hooks/useCurrentAction";
 import {useTasks} from "../hooks/useTasks";
+import {TaskItem} from "../components/TaskItem.tsx";
 
 const TodoContainer: React.FC = forwardRef<HTMLDivElement>((_, ref) => {
     const {changeAction} = useCurrentAction();
@@ -15,7 +16,7 @@ const TodoContainer: React.FC = forwardRef<HTMLDivElement>((_, ref) => {
     return (
         <main className={styles.container} ref={ref}>
             <div className={` ${styles.slide} ${styles["add-task"]}`}>
-                Add Task
+                <h2 className={styles.title}>Add Task</h2>
                 <ActionButton
                     className={styles.backBtn}
                     varient="secondary"
@@ -39,8 +40,8 @@ const TodoContainer: React.FC = forwardRef<HTMLDivElement>((_, ref) => {
             </div>
 
             <div className={`${styles.slide} ${styles["view-task"]}`}>
-                <h2>Tasks</h2>
-                {tasks.map((task) => (
+                <h2 className={styles.title}>Tasks</h2>
+                {/* {tasks.map((task) => (
                     <>
                         <span>{task.title}</span>
                         <br />
@@ -50,7 +51,16 @@ const TodoContainer: React.FC = forwardRef<HTMLDivElement>((_, ref) => {
                         <br />
                         <span>{task.completed}</span>
                     </>
-                ))}
+                ))} */}
+
+                <ul>
+                    {tasks.map((task) => (
+                        <li>
+                            <TaskItem task={task} />
+                        </li>
+                    ))}
+                </ul>
+
                 <ActionButton
                     varient="primary"
                     onClick={() => changeAction("edit")}
@@ -61,7 +71,7 @@ const TodoContainer: React.FC = forwardRef<HTMLDivElement>((_, ref) => {
             </div>
 
             <div className={`${styles.slide} ${styles["task-detail"]}`}>
-                Task Detail
+                <h2 className={styles.title}>Task Detail</h2>
                 <ActionButton
                     className={styles.backBtn}
                     varient="secondary"

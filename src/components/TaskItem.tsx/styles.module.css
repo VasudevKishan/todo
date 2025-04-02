@@ -1,0 +1,12 @@
+.item input {
+    display: none;
+}
+
+.item {
+    width: 100%;
+    height: 25px;
+    background: var(--component);
+}
+
+.icon {
+}
