@@ -8,15 +8,37 @@ interface TaskItemProps {
 
 export const TaskItem: React.FC<TaskItemProps> = ({task}) => {
     return (
-        <div key={task.id} className={styles.item}>
+        <div
+            key={task.id}
+            className={`${styles.item} ${
+                task.completed ? styles.strikeThrough : ""
+            }`}
+        >
             <input type="checkbox" id={task.id.toString()} />
             <span className={`material-icons ${styles.check}`}>
                 {task.completed ? "check_circle" : "radio_button_unchecked"}
             </span>
             <label htmlFor={task.id.toString()}>{task.title}</label>
 
-            <span className={`material-icons ${styles.icon}`}>
-                {task.starred ? "star" : "star_border"}
+            <span className={styles.actionIcons}>
+                {task.completed ? (
+                    <span className={`material-icons  ${styles.delete}`}>
+                        delete
+                    </span>
+                ) : (
+                    <>
+                        <span className={`material-icons ${styles.editIcon}`}>
+                            mode
+                        </span>
+                        <span
+                            className={`material-icons ${styles.starIcon}
+                    ${task.starred ? styles.starred : styles.notStarred}
+                `}
+                        >
+                            {task.starred ? "star" : "star_border"}
+                        </span>
+                    </>
+                )}
             </span>
         </div>
     );

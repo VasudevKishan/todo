@@ -11,14 +11,54 @@
     display: flex;
     align-items: center;
     border-radius: 10px;
+    /* transition: 0.2s ease-in; */
 }
 
-.icon {
-    position: absolute;
-    right: 0;
-    font-size: 1.1rem;
-    margin: 1rem;
+.item:hover {
+    background: var(--component-s);
+}
+
+.item.strikeThrough {
     color: var(--dk-subtext);
+    background: var(--card);
+}
+
+.item.strikeThrough label {
+    text-decoration: line-through;
+}
+
+.actionIcons {
+    position: absolute;
+    display: flex;
+    gap: 0.5rem;
+    margin: 1rem;
+    right: 0;
+    color: var(--dk-subtext);
+}
+.actionIcons > * {
+    font-size: 1.1rem;
+}
+
+.notStarred {
+    display: none;
+}
+
+.item:hover .notStarred {
+    display: block;
+}
+
+.editIcon {
+    display: none;
+}
+
+.item:hover .editIcon {
+    display: block;
+}
+
+.editIcon:hover,
+.delete:hover {
+    transform: scale(1.2);
+    color: var(--primary);
 }
 
 .check {

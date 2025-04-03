@@ -41,17 +41,6 @@ const TodoContainer: React.FC = forwardRef<HTMLDivElement>((_, ref) => {
 
             <div className={`${styles.slide} ${styles["view-task"]}`}>
                 <h2 className={styles.title}>Tasks</h2>
-                {/* {tasks.map((task) => (
-                    <>
-                        <span>{task.title}</span>
-                        <br />
-                        <span>{task.description}</span>
-                        <br />
-                        <span>{task.starred}</span>
-                        <br />
-                        <span>{task.completed}</span>
-                    </>
-                ))} */}
 
                 <ul className={styles.TaskList}>
                     {tasks.map((task) => (
