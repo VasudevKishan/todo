@@ -6,8 +6,9 @@
     box-sizing: border-box;
     font-family: "Lexend Deca", sans-serif;
     /* border: 2px red solid; */
-    transition: 0.1s ease-out;
+    transition: 0.2s ease-out, color 0s;
 }
+
 button {
     cursor: pointer;
 }
