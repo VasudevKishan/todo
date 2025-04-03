@@ -8,10 +8,10 @@ import {TaskItem} from "../components/TaskItem.tsx";
 
 const TodoContainer: React.FC = forwardRef<HTMLDivElement>((_, ref) => {
     const {changeAction} = useCurrentAction();
-    // const {tasks, addTask, removeTask, toggleTaskCompletion, toggleStar} =
-    //     useTasks();
+    const {tasks, addTask, removeTask, toggleTaskCompletion, toggleStar} =
+        useTasks();
 
-    const {tasks} = useTasks();
+    // const {tasks} = useTasks();
 
     return (
         <main className={styles.container} ref={ref}>
@@ -44,8 +44,11 @@ const TodoContainer: React.FC = forwardRef<HTMLDivElement>((_, ref) => {
 
                 <ul className={styles.TaskList}>
                     {tasks.map((task) => (
-                        <li>
-                            <TaskItem task={task} />
+                        <li key={task.id}>
+                            <TaskItem
+                                task={task}
+                                onChecked={toggleTaskCompletion}
+                            />
                         </li>
                     ))}
                 </ul>
