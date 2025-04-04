@@ -5,9 +5,16 @@ import styles from "./styles.module.css";
 interface TaskItemProps {
     task: Task;
     onChecked: (id: number) => void;
+    onEdit: () => void;
+    onDetail: () => void;
 }
 
-export const TaskItem: React.FC<TaskItemProps> = ({task, onChecked}) => {
+export const TaskItem: React.FC<TaskItemProps> = ({
+    task,
+    onChecked,
+    onEdit,
+    onDetail,
+}) => {
     return (
         <div
             className={`${styles.item} ${
@@ -23,7 +30,9 @@ export const TaskItem: React.FC<TaskItemProps> = ({task, onChecked}) => {
             >
                 {task.completed ? "check_circle" : "radio_button_unchecked"}
             </span>
-            <label htmlFor={task.id.toString()}>{task.title}</label>
+            <label htmlFor={task.id.toString()} onClick={onDetail}>
+                {task.title}
+            </label>
 
             <span className={styles.actionIcons}>
                 {task.completed ? (
@@ -32,7 +41,10 @@ export const TaskItem: React.FC<TaskItemProps> = ({task, onChecked}) => {
                     </span>
                 ) : (
                     <>
-                        <span className={`material-icons ${styles.editIcon}`}>
+                        <span
+                            className={`material-icons ${styles.editIcon}`}
+                            onClick={onEdit}
+                        >
                             mode
                         </span>
                         <span
