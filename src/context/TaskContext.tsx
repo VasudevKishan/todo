@@ -9,6 +9,7 @@ export const TaskProvider: React.FC<{children: React.ReactNode}> = ({
     children,
 }) => {
     const [tasks, setTasks] = useState<Task[]>([]);
+    const [selectedTask, setSelectedTask] = useState<Task | null>(null);
     const [isInitialized, setIsInitialized] = useState<boolean>(false);
     useEffect(() => {
         const currentTasks = localStorage.getItem("tasks");
@@ -74,15 +75,22 @@ export const TaskProvider: React.FC<{children: React.ReactNode}> = ({
             : 1;
     };
 
+    const selectTask = (taskID: number) => {
+        const task = tasks.find((t) => t.id === taskID) || null;
+        setSelectedTask(task);
+    };
+
     return (
         <TaskContext.Provider
             value={{
                 tasks,
+                selectedTask,
                 addTask,
                 removeTask,
                 toggleTaskCompletion,
                 toggleStar,
                 generateUniqueId,
+                selectTask,
             }}
         >
             {children}

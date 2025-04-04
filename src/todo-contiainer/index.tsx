@@ -8,8 +8,15 @@ import {TaskItem} from "../components/TaskItem.tsx";
 
 const TodoContainer: React.FC = forwardRef<HTMLDivElement>((_, ref) => {
     const {changeAction} = useCurrentAction();
-    const {tasks, addTask, removeTask, toggleTaskCompletion, toggleStar} =
-        useTasks();
+    const {
+        tasks,
+        addTask,
+        removeTask,
+        toggleTaskCompletion,
+        toggleStar,
+        selectTask,
+        selectedTask,
+    } = useTasks();
 
     // const {tasks} = useTasks();
 
@@ -48,6 +55,14 @@ const TodoContainer: React.FC = forwardRef<HTMLDivElement>((_, ref) => {
                             <TaskItem
                                 task={task}
                                 onChecked={toggleTaskCompletion}
+                                onEdit={() => {
+                                    selectTask(task.id);
+                                    changeAction("edit");
+                                }}
+                                onDetail={() => {
+                                    selectTask(task.id);
+                                    changeAction("detail");
+                                }}
                             />
                         </li>
                     ))}
@@ -63,7 +78,11 @@ const TodoContainer: React.FC = forwardRef<HTMLDivElement>((_, ref) => {
             </div>
 
             <div className={`${styles.slide} ${styles["task-detail"]}`}>
-                <h2 className={styles.title}>Task Detail</h2>
+                <h2 className={styles.title}>Task Details</h2>
+                <h2 className={styles.taskTitle}>{selectedTask?.title}</h2>
+                <h2 className={styles.taskDescription}>
+                    {selectedTask?.description}
+                </h2>
                 <ActionButton
                     className={styles.backBtn}
                     varient="secondary"
