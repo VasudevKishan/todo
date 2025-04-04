@@ -15,7 +15,7 @@ export interface UserActionContextProps {
 export interface Task {
     id: number;
     title: string;
-    description: string;
+    description?: string;
     completed: boolean;
     starred: boolean;
 }
