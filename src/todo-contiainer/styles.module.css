@@ -47,3 +47,50 @@ ul {
     bottom: 25px;
     left: 25px;
 }
+
+.taskDetail {
+    display: flex;
+    flex-direction: column;
+}
+
+.expandTitle {
+    /*TODO:  might use in future else remove */
+}
+
+.detailHeader {
+    width: 100%;
+    display: flex;
+    padding: 1rem 0;
+    & .icons {
+        color: var(--primary);
+        margin-left: auto;
+
+        & * {
+            padding: 2.5px;
+        }
+    }
+}
+
+.detailContent {
+    flex: 1;
+    margin-bottom: auto;
+    padding-bottom: 30px;
+}
+
+.taskDescription {
+    padding-top: 8px;
+    color: var(--dk-subtext);
+    display: flex;
+}
+.divider {
+    width: 100%;
+    height: 4px;
+    background-color: var(--primary);
+    border-radius: 2px;
+    outline: none;
+    border: 0;
+}
+
+.expandFooter {
+    /* TODO:  might use in future else remove */
+}
