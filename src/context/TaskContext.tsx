@@ -32,6 +32,12 @@ export const TaskProvider: React.FC<{children: React.ReactNode}> = ({
                     completed: true,
                     starred: false,
                 },
+                {
+                    id: 3,
+                    title: "Task 3",
+                    completed: true,
+                    starred: false,
+                },
             ];
             setTasks(defaultTasks);
             localStorage.setItem("tasks", JSON.stringify(defaultTasks));
