@@ -13,6 +13,11 @@
     border-radius: 10px;
 }
 
+.item label {
+    flex: 1;
+    cursor: pointer;
+}
+
 .item:hover {
     background: var(--component-s);
 }
@@ -48,6 +53,7 @@
 
 .editIcon {
     display: none;
+    cursor: pointer;
 }
 
 .item:hover .editIcon {
