@@ -16,6 +16,7 @@ const TodoContainer: React.FC = forwardRef<HTMLDivElement>((_, ref) => {
         toggleStar,
         selectTask,
         selectedTask,
+        generateUniqueId,
     } = useTasks();
 
     // const {tasks} = useTasks();
@@ -70,7 +71,17 @@ const TodoContainer: React.FC = forwardRef<HTMLDivElement>((_, ref) => {
 
                 <ActionButton
                     varient="primary"
-                    onClick={() => changeAction("edit")}
+                    onClick={() => {
+                        const newTask = {
+                            id: generateUniqueId(),
+                            title: "",
+                            description: "",
+                            completed: false,
+                            starred: false,
+                        };
+                        selectTask(newTask.id);
+                        changeAction("edit");
+                    }}
                     className={styles.addBtn}
                 >
                     Add Task
