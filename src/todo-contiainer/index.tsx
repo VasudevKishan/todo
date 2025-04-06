@@ -1,4 +1,4 @@
-import React, {forwardRef} from "react";
+import React, {forwardRef, useEffect, useState} from "react";
 import styles from "./styles.module.css";
 import {ActionButton} from "../components/ActionButton/ActionButton";
 
@@ -21,30 +21,78 @@ const TodoContainer: React.FC = forwardRef<HTMLDivElement>((_, ref) => {
 
     // const {tasks} = useTasks();
 
+    const [taskTitle, setTaskTitle] = useState<string>("");
+    const [taskDescription, setTaskDescription] = useState<string>("");
+
+    useEffect(() => {
+        if (selectedTask) {
+            setTaskTitle(selectedTask.title || "");
+            setTaskDescription(selectedTask.description || "");
+        }
+    }, [selectedTask]);
+
+    const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (!taskTitle.trim()) {
+            console.log("title is required");
+            return;
+        }
+        console.log("Task added : ", {taskTitle, taskDescription});
+        changeAction("view");
+    };
+
     return (
         <main className={styles.container} ref={ref}>
             <div className={` ${styles.slide} ${styles["add-task"]}`}>
                 <h2 className={styles.title}>Add Task</h2>
-                <ActionButton
-                    className={styles.backBtn}
-                    varient="secondary"
-                    onClick={() => {
-                        console.log("add new task");
-                        changeAction("view");
-                    }}
-                >
-                    <span className="material-icons">arrow_back_ios</span>
-                </ActionButton>
-                <ActionButton
-                    className={styles.addBtn}
-                    varient="primary"
-                    onClick={() => {
-                        console.log("added successfully");
-                        changeAction("view");
-                    }}
-                >
-                    Add
-                </ActionButton>
+                <form onSubmit={handleFormSubmit}>
+                    <div>
+                        <input
+                            type="text"
+                            name="taskTitle"
+                            id="taskTitle"
+                            required
+                            value={taskTitle}
+                            onChange={(e) => setTaskTitle(e.target.value)}
+                        />
+                        <label htmlFor="taskTitle" style={{display: "none"}}>
+                            Title
+                        </label>
+                        <span className={`material-icons`}>
+                            {selectedTask?.starred ? "star" : "star_border"}
+                        </span>
+                        <br />
+                        <input
+                            type="text"
+                            name="taskDescription"
+                            id="taskDescription"
+                            value={taskDescription}
+                            onChange={(e) => setTaskDescription(e.target.value)}
+                        />
+                        <label htmlFor="taskDescription">Note</label>
+                    </div>
+                    <div className={styles.editFooter}>
+                        <ActionButton
+                            className={styles.backBtn}
+                            varient="secondary"
+                            onClick={() => {
+                                console.log("add new task");
+                                changeAction("view");
+                            }}
+                        >
+                            <span className="material-icons">
+                                arrow_back_ios
+                            </span>
+                        </ActionButton>
+                        <ActionButton
+                            className={styles.addBtn}
+                            varient="primary"
+                            type="submit"
+                        >
+                            Add
+                        </ActionButton>
+                    </div>
+                </form>
             </div>
 
             <div className={`${styles.slide} ${styles["view-task"]}`}>
@@ -57,11 +105,11 @@ const TodoContainer: React.FC = forwardRef<HTMLDivElement>((_, ref) => {
                                 task={task}
                                 onChecked={toggleTaskCompletion}
                                 onEdit={() => {
-                                    selectTask(task.id);
+                                    selectTask(task);
                                     changeAction("edit");
                                 }}
                                 onDetail={() => {
-                                    selectTask(task.id);
+                                    selectTask(task);
                                     changeAction("detail");
                                 }}
                             />
@@ -79,7 +127,7 @@ const TodoContainer: React.FC = forwardRef<HTMLDivElement>((_, ref) => {
                             completed: false,
                             starred: false,
                         };
-                        selectTask(newTask.id);
+                        selectTask(newTask);
                         changeAction("edit");
                     }}
                     className={styles.addBtn}
@@ -99,15 +147,13 @@ const TodoContainer: React.FC = forwardRef<HTMLDivElement>((_, ref) => {
                     <h2 className={styles.taskTitle}>{selectedTask?.title}</h2>
                     <div className={styles.icons}>
                         {selectedTask?.starred ? (
-                            <span className={`material-icons ${styles.icon}`}>
-                                star
-                            </span>
+                            <span className={`material-icons`}>star</span>
                         ) : (
                             ""
                         )}
 
                         {selectedTask?.completed ? (
-                            <span className={`material-icons ${styles.icon}`}>
+                            <span className={`material-icons `}>
                                 check_circle
                             </span>
                         ) : (
