@@ -81,9 +81,8 @@ export const TaskProvider: React.FC<{children: React.ReactNode}> = ({
             : 1;
     };
 
-    const selectTask = (taskID: number) => {
-        const task = tasks.find((t) => t.id === taskID) || null;
-        setSelectedTask(task);
+    const selectTask = (task: Task) => {
+        setSelectedTask({...task});
     };
 
     return (

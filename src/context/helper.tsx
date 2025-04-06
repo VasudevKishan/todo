@@ -28,5 +28,5 @@ export interface TaskContextProps {
     toggleTaskCompletion: (id: number) => void;
     toggleStar: (id: number) => void;
     generateUniqueId: () => number;
-    selectTask: (taskId: number) => void;
+    selectTask: (task: Task) => void;
 }
