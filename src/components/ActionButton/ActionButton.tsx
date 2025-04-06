@@ -6,6 +6,7 @@ interface ButtonProps {
     onClick?: () => void;
     children: React.ReactNode;
     className?: string;
+    type?: "button" | "submit" | "reset" | undefined;
 }
 
 export const ActionButton: React.FC<ButtonProps> = ({
@@ -13,9 +14,11 @@ export const ActionButton: React.FC<ButtonProps> = ({
     onClick,
     children,
     className = "",
+    type,
 }) => {
     return (
         <button
+            type={type || "button"}
             className={`${styles.btn} ${
                 varient === "primary"
                     ? styles["btn-primary"]
