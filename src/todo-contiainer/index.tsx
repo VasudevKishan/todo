@@ -79,8 +79,7 @@ const TodoContainer: React.FC = forwardRef<HTMLDivElement>((_, ref) => {
                             {taskStarred ? "star" : "star_border"}
                         </span>
                         <br />
-                        <input
-                            type="text"
+                        <textarea
                             name="taskDescription"
                             id="taskDescription"
                             value={taskDescription}
