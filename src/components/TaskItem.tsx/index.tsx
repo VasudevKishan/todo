@@ -7,6 +7,7 @@ interface TaskItemProps {
     onChecked: (id: number) => void;
     onEdit: () => void;
     onDetail: () => void;
+    onDelete: () => void;
 }
 
 export const TaskItem: React.FC<TaskItemProps> = ({
@@ -14,6 +15,7 @@ export const TaskItem: React.FC<TaskItemProps> = ({
     onChecked,
     onEdit,
     onDetail,
+    onDelete,
 }) => {
     return (
         <div
@@ -36,7 +38,10 @@ export const TaskItem: React.FC<TaskItemProps> = ({
 
             <span className={styles.actionIcons}>
                 {task.completed ? (
-                    <span className={`material-icons  ${styles.delete}`}>
+                    <span
+                        className={`material-icons  ${styles.delete}`}
+                        onClick={onDelete}
+                    >
                         delete
                     </span>
                 ) : (
