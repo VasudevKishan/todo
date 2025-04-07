@@ -22,11 +22,13 @@ export interface Task {
 
 export interface TaskContextProps {
     tasks: Task[];
-    selectedTask: Task | null;
+    selectedTask: Task;
     addTask: (task: Task) => void;
     removeTask: (id: number) => void;
     toggleTaskCompletion: (id: number) => void;
     toggleStar: (id: number) => void;
     generateUniqueId: () => number;
     selectTask: (task: Task) => void;
+    userState: "new" | "edit";
+    changeState: (state: "new" | "edit") => void;
 }
