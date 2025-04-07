@@ -8,8 +8,9 @@ export const TaskContext = createContext<TaskContextProps | undefined>(
 export const TaskProvider: React.FC<{children: React.ReactNode}> = ({
     children,
 }) => {
+    const [userState, setUserState] = useState<"new" | "edit">("new");
     const [tasks, setTasks] = useState<Task[]>([]);
-    const [selectedTask, setSelectedTask] = useState<Task | null>(null);
+    const [selectedTask, setSelectedTask] = useState<Task>(tasks[0]);
     const [isInitialized, setIsInitialized] = useState<boolean>(false);
     useEffect(() => {
         const currentTasks = localStorage.getItem("tasks");
@@ -52,7 +53,13 @@ export const TaskProvider: React.FC<{children: React.ReactNode}> = ({
     }, [tasks, isInitialized]);
 
     const addTask = (task: Task) => {
-        setTasks((prevTasks) => [...prevTasks, task]);
+        if (tasks.some((task) => task.id === selectedTask.id)) {
+            setTasks((prevTasks) =>
+                prevTasks.filter((t) => t.id !== task.id).concat(task)
+            );
+        } else {
+            setTasks((prevTasks) => [...prevTasks, task]);
+        }
     };
 
     const removeTask = (id: number) => {
@@ -84,6 +91,9 @@ export const TaskProvider: React.FC<{children: React.ReactNode}> = ({
     const selectTask = (task: Task) => {
         setSelectedTask({...task});
     };
+    const changeState = (state: "new" | "edit") => {
+        setUserState(state);
+    };
 
     return (
         <TaskContext.Provider
@@ -96,6 +106,8 @@ export const TaskProvider: React.FC<{children: React.ReactNode}> = ({
                 toggleStar,
                 generateUniqueId,
                 selectTask,
+                userState,
+                changeState,
             }}
         >
             {children}
