@@ -18,30 +18,7 @@ export const TaskProvider: React.FC<{children: React.ReactNode}> = ({
         if (currentTasks) {
             setTasks(JSON.parse(currentTasks));
         } else {
-            const defaultTasks: Task[] = [
-                {
-                    id: 1,
-                    title: "Task 1",
-                    description: "Task 1 description with somewhat long test",
-                    completed: false,
-                    starred: true,
-                },
-                {
-                    id: 2,
-                    title: "Task 2",
-                    description: "Task 2 description with somewhat long test",
-                    completed: true,
-                    starred: false,
-                },
-                {
-                    id: 3,
-                    title: "Task 3",
-                    completed: true,
-                    starred: false,
-                },
-            ];
-            setTasks(defaultTasks);
-            localStorage.setItem("tasks", JSON.stringify(defaultTasks));
+            setTasks([]);
         }
         setIsInitialized(true);
     }, []);
