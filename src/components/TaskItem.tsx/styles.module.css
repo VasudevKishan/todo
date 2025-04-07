@@ -32,10 +32,10 @@
 }
 
 .actionIcons {
-    position: absolute;
     display: flex;
-    gap: 0.5rem;
     margin: 1rem;
+    justify-content: flex-end;
+    gap: 0.5rem;
     right: 0;
     color: var(--dk-subtext);
 }
