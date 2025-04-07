@@ -74,14 +74,6 @@ export const TaskProvider: React.FC<{children: React.ReactNode}> = ({
         );
     };
 
-    const toggleStar = (id: number) => {
-        setTasks((prevTasks) =>
-            prevTasks.map((task) =>
-                task.id === id ? {...task, starred: !task.starred} : task
-            )
-        );
-    };
-
     const generateUniqueId = (): number => {
         return tasks.length > 0
             ? Math.max(...tasks.map((task) => task.id)) + 1
@@ -103,7 +95,6 @@ export const TaskProvider: React.FC<{children: React.ReactNode}> = ({
                 addTask,
                 removeTask,
                 toggleTaskCompletion,
-                toggleStar,
                 generateUniqueId,
                 selectTask,
                 userState,

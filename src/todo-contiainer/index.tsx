@@ -5,6 +5,7 @@ import {ActionButton} from "../components/ActionButton/ActionButton";
 import {useCurrentAction} from "../hooks/useCurrentAction";
 import {useTasks} from "../hooks/useTasks";
 import {TaskItem} from "../components/TaskItem.tsx";
+import {Task} from "../context/helper.tsx";
 
 const TodoContainer: React.FC = forwardRef<HTMLDivElement>((_, ref) => {
     const {changeAction} = useCurrentAction();
@@ -13,21 +14,22 @@ const TodoContainer: React.FC = forwardRef<HTMLDivElement>((_, ref) => {
         addTask,
         removeTask,
         toggleTaskCompletion,
-        toggleStar,
         selectTask,
         selectedTask,
         generateUniqueId,
+        changeState,
+        userState,
     } = useTasks();
-
-    // const {tasks} = useTasks();
 
     const [taskTitle, setTaskTitle] = useState<string>("");
     const [taskDescription, setTaskDescription] = useState<string>("");
+    const [taskStarred, setTaskStarred] = useState<boolean>(false);
 
     useEffect(() => {
         if (selectedTask) {
             setTaskTitle(selectedTask.title || "");
             setTaskDescription(selectedTask.description || "");
+            setTaskStarred(selectedTask.starred);
         }
     }, [selectedTask]);
 
@@ -37,7 +39,17 @@ const TodoContainer: React.FC = forwardRef<HTMLDivElement>((_, ref) => {
             console.log("title is required");
             return;
         }
-        console.log("Task added : ", {taskTitle, taskDescription});
+        console.log("Task added : ", {taskTitle, taskDescription, taskStarred});
+
+        const newTask: Task = {
+            id: selectedTask.id,
+            title: taskTitle,
+            description: taskDescription,
+            starred: taskStarred,
+            completed: false,
+        };
+        addTask(newTask);
+
         changeAction("view");
     };
 
@@ -58,8 +70,13 @@ const TodoContainer: React.FC = forwardRef<HTMLDivElement>((_, ref) => {
                         <label htmlFor="taskTitle" style={{display: "none"}}>
                             Title
                         </label>
-                        <span className={`material-icons`}>
-                            {selectedTask?.starred ? "star" : "star_border"}
+                        <span
+                            className={`material-icons`}
+                            onClick={() => {
+                                setTaskStarred(!taskStarred);
+                            }}
+                        >
+                            {taskStarred ? "star" : "star_border"}
                         </span>
                         <br />
                         <input
@@ -89,7 +106,7 @@ const TodoContainer: React.FC = forwardRef<HTMLDivElement>((_, ref) => {
                             varient="primary"
                             type="submit"
                         >
-                            Add
+                            {userState === "edit" ? "Update" : "Add"}
                         </ActionButton>
                     </div>
                 </form>
@@ -106,7 +123,11 @@ const TodoContainer: React.FC = forwardRef<HTMLDivElement>((_, ref) => {
                                 onChecked={toggleTaskCompletion}
                                 onEdit={() => {
                                     selectTask(task);
+                                    changeState("edit");
                                     changeAction("edit");
+                                }}
+                                onDelete={() => {
+                                    removeTask(task.id);
                                 }}
                                 onDetail={() => {
                                     selectTask(task);
@@ -128,6 +149,7 @@ const TodoContainer: React.FC = forwardRef<HTMLDivElement>((_, ref) => {
                             starred: false,
                         };
                         selectTask(newTask);
+                        changeState("new");
                         changeAction("edit");
                     }}
                     className={styles.addBtn}
