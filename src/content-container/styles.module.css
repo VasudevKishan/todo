@@ -1,0 +1,10 @@
+.container {
+    /* border: 2px red solid; */
+    display: flex;
+    margin: 0 15% 50px;
+    min-width: 250px;
+    min-height: 300px;
+    height: 60vh;
+    /* overflow: hidden; */
+    gap: 25px;
+}

@@ -1,13 +1,20 @@
 import "./App.css";
+import Header from "./header";
+import ContentContainer from "./content-container";
+import {ThemeProvider} from "./context/ThemeContext";
+import {TaskProvider} from "./context/TaskContext";
 
 function App() {
-  return (
-    <h1>
-      todo.
-      <p>{import.meta.env.VITE_EXAMPLE_ENV_VAR}</p>
-      Coming Soon.....!
-    </h1>
-  );
+    return (
+        <TaskProvider>
+            <ThemeProvider>
+                <>
+                    <Header />
+                    <ContentContainer />
+                </>
+            </ThemeProvider>
+        </TaskProvider>
+    );
 }
 
 export default App;
