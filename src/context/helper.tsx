@@ -23,7 +23,7 @@ export interface Task {
 }
 
 export interface TaskContextProps {
-    tasks: Task[];
+    filteredTasks: Task[];
     selectedTask: Task;
     addTask: (task: Task) => void;
     removeTask: (id: number) => void;
@@ -32,4 +32,6 @@ export interface TaskContextProps {
     selectTask: (task: Task) => void;
     userState: "new" | "edit";
     changeState: (state: "new" | "edit") => void;
+    filterByStarred: () => void;
+    clearFilter: () => void;
 }

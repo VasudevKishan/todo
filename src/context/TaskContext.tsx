@@ -10,6 +10,7 @@ export const TaskProvider: React.FC<{children: React.ReactNode}> = ({
 }) => {
     const [userState, setUserState] = useState<"new" | "edit">("new");
     const [tasks, setTasks] = useState<Task[]>([]);
+    const [filteredTasks, setFilteredTasks] = useState<Task[]>([]);
     const [selectedTask, setSelectedTask] = useState<Task>(tasks[0]);
     const [isInitialized, setIsInitialized] = useState<boolean>(false);
     useEffect(() => {
@@ -17,6 +18,7 @@ export const TaskProvider: React.FC<{children: React.ReactNode}> = ({
 
         if (currentTasks) {
             setTasks(JSON.parse(currentTasks));
+            setFilteredTasks(JSON.parse(currentTasks));
         } else {
             setTasks([]);
         }
@@ -64,10 +66,20 @@ export const TaskProvider: React.FC<{children: React.ReactNode}> = ({
         setUserState(state);
     };
 
+    const filterByStarred = () => {
+        // const filteredtasks = tasks.filter((task) => task.starred);
+        console.log(filteredTasks);
+        setFilteredTasks(tasks.filter((task) => task.starred));
+    };
+
+    const clearFilter = () => {
+        setFilteredTasks(tasks);
+    };
+
     return (
         <TaskContext.Provider
             value={{
-                tasks,
+                filteredTasks,
                 selectedTask,
                 addTask,
                 removeTask,
@@ -76,6 +88,8 @@ export const TaskProvider: React.FC<{children: React.ReactNode}> = ({
                 selectTask,
                 userState,
                 changeState,
+                filterByStarred,
+                clearFilter,
             }}
         >
             {children}

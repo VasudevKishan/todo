@@ -11,7 +11,7 @@ import {useTheme} from "../hooks/useTheme.tsx";
 const TodoContainer: React.FC = forwardRef<HTMLDivElement>((_, ref) => {
     const {changeAction} = useCurrentAction();
     const {
-        tasks,
+        filteredTasks,
         addTask,
         removeTask,
         toggleTaskCompletion,
@@ -136,7 +136,7 @@ const TodoContainer: React.FC = forwardRef<HTMLDivElement>((_, ref) => {
                 <h2 className={styles.title}>Tasks</h2>
 
                 <ul className={styles.TaskList}>
-                    {tasks.map((task) => (
+                    {filteredTasks.map((task) => (
                         <li key={task.id}>
                             <TaskItem
                                 task={task}

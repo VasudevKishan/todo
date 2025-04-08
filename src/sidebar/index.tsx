@@ -3,16 +3,25 @@ import styles from "./styles.module.css";
 import FilterTitle from "../components/FilterTitle";
 import Toggle from "../components/Toggle";
 import {useTheme} from "../hooks/useTheme";
+import {useTasks} from "../hooks/useTasks";
 
 type filterTypes = "All" | "Starred";
 
 const SideBar: React.FC = () => {
-    const {toggleTheme, isSidebarVisible} = useTheme();
+    const {toggleTheme, isSidebarVisible, toggleSidebar} = useTheme();
     const [activeFilter, setActiveFilter] = useState<filterTypes>("All");
+    const {clearFilter, filterByStarred} = useTasks();
 
     const handleFilterClick = (filterName: filterTypes) => {
         setActiveFilter(filterName);
-        console.log("All todos");
+        switch (filterName) {
+            case "All":
+                clearFilter();
+                break;
+            case "Starred":
+                filterByStarred();
+        }
+        toggleSidebar();
     };
     return (
         <aside
