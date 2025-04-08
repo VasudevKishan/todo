@@ -94,3 +94,52 @@ ul {
 .expandFooter {
     /* TODO:  might use in future else remove */
 }
+
+form {
+    flex: 1;
+}
+
+.taskForm {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+}
+.taskForm div {
+    display: flex;
+}
+
+.taskForm input {
+    flex: 1;
+}
+
+.formStarBtn {
+    color: var(--primary);
+    justify-content: flex-end;
+    padding-left: 10px;
+}
+.taskForm input {
+}
+
+input,
+textarea {
+    background: var(--component);
+    color: var(--dk-text);
+    border: none;
+    outline: 0;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+textarea {
+    height: 20vh;
+    padding: 10px;
+}
+
+label {
+    color: var(--primary);
+    font-size: 1.5rem;
+    padding-bottom: 10px;
+}
+
+

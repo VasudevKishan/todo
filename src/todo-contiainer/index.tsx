@@ -58,34 +58,37 @@ const TodoContainer: React.FC = forwardRef<HTMLDivElement>((_, ref) => {
             <div className={` ${styles.slide} ${styles["add-task"]}`}>
                 <h2 className={styles.title}>Add Task</h2>
                 <form onSubmit={handleFormSubmit}>
-                    <div>
-                        <input
-                            type="text"
-                            name="taskTitle"
-                            id="taskTitle"
-                            required
-                            value={taskTitle}
-                            onChange={(e) => setTaskTitle(e.target.value)}
-                        />
+                    <div className={styles.taskForm}>
+                        <div>
+                            <input
+                                type="text"
+                                name="taskTitle"
+                                id="taskTitle"
+                                required
+                                value={taskTitle}
+                                onChange={(e) => setTaskTitle(e.target.value)}
+                            />
                         <label htmlFor="taskTitle" style={{display: "none"}}>
-                            Title
-                        </label>
-                        <span
-                            className={`material-icons`}
-                            onClick={() => {
-                                setTaskStarred(!taskStarred);
-                            }}
-                        >
-                            {taskStarred ? "star" : "star_border"}
-                        </span>
+                                Title
+                            </label>
+                            <span
+                                className={`material-icons ${styles.formStarBtn}`}
+                                onClick={() => {
+                                    setTaskStarred(!taskStarred);
+                                }}
+                            >
+                                {taskStarred ? "star" : "star_border"}
+                            </span>
+                        </div>
                         <br />
+                        <label htmlFor="taskDescription">Note</label>
                         <textarea
                             name="taskDescription"
                             id="taskDescription"
                             value={taskDescription}
                             onChange={(e) => setTaskDescription(e.target.value)}
+                            placeholder="Type here..."
                         />
-                        <label htmlFor="taskDescription">Note</label>
                     </div>
                     <div className={styles.editFooter}>
                         <ActionButton
