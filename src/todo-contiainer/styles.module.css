@@ -95,7 +95,7 @@ ul {
     /* TODO:  might use in future else remove */
 }
 
-form {
+.add-task form {
     flex: 1;
 }
 
@@ -116,13 +116,19 @@ form {
 .formStarBtn {
     color: var(--primary);
     justify-content: flex-end;
-    padding-left: 10px;
+    padding: 5px 10px;
+    transform-origin: center;
+    transition: transform 0.2s ease-in-out;
 }
+.rotateOnClick {
+    animation: rotateAndScale 0.5s ease-in-out; /* Apply the animation */
+}
+
 .taskForm input {
 }
 
-input,
-textarea {
+.add-task input,
+.add-task textarea {
     background: var(--component);
     color: var(--dk-text);
     border: none;
@@ -131,15 +137,25 @@ textarea {
     padding: 10px;
 }
 
-textarea {
+.add-task textarea {
     height: 20vh;
     padding: 10px;
 }
 
-label {
+.add-task label {
     color: var(--primary);
     font-size: 1.5rem;
     padding-bottom: 10px;
 }
 
-
+@keyframes rotateAndScale {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+    50% {
+        transform: rotate(90deg) scale(1.2); /* Rotate 90deg and scale up */
+    }
+    100% {
+        transform: rotate(0deg) scale(1); /* Return to original state */
+    }
+}

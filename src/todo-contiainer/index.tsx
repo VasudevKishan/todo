@@ -25,6 +25,7 @@ const TodoContainer: React.FC = forwardRef<HTMLDivElement>((_, ref) => {
     const [taskDescription, setTaskDescription] = useState<string>("");
     const [taskStarred, setTaskStarred] = useState<boolean>(false);
 
+    const [animate, setAnimate] = useState<boolean>(false);
     useEffect(() => {
         if (selectedTask) {
             setTaskTitle(selectedTask.title || "");
@@ -68,13 +69,22 @@ const TodoContainer: React.FC = forwardRef<HTMLDivElement>((_, ref) => {
                                 value={taskTitle}
                                 onChange={(e) => setTaskTitle(e.target.value)}
                             />
-                        <label htmlFor="taskTitle" style={{display: "none"}}>
+                            <label
+                                htmlFor="taskTitle"
+                                style={{display: "none"}}
+                            >
                                 Title
                             </label>
                             <span
-                                className={`material-icons ${styles.formStarBtn}`}
+                                className={`material-icons ${
+                                    styles.formStarBtn
+                                } ${animate ? styles.rotateOnClick : ""}`}
                                 onClick={() => {
+                                    setAnimate(true);
                                     setTaskStarred(!taskStarred);
+                                }}
+                                onAnimationEnd={() => {
+                                    setAnimate(false);
                                 }}
                             >
                                 {taskStarred ? "star" : "star_border"}
@@ -88,6 +98,7 @@ const TodoContainer: React.FC = forwardRef<HTMLDivElement>((_, ref) => {
                             value={taskDescription}
                             onChange={(e) => setTaskDescription(e.target.value)}
                             placeholder="Type here..."
+                            spellCheck="false"
                         />
                     </div>
                     <div className={styles.editFooter}>
