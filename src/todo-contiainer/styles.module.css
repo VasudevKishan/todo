@@ -114,6 +114,7 @@ ul {
 }
 
 .formStarBtn {
+    cursor: pointer;
     color: var(--primary);
     justify-content: flex-end;
     padding: 5px 10px;
@@ -122,9 +123,6 @@ ul {
 }
 .rotateOnClick {
     animation: rotateAndScale 0.5s ease-in-out; /* Apply the animation */
-}
-
-.taskForm input {
 }
 
 .add-task input,
