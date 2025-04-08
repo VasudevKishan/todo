@@ -18,16 +18,17 @@ export const TaskProvider: React.FC<{children: React.ReactNode}> = ({
 
         if (currentTasks) {
             setTasks(JSON.parse(currentTasks));
-            setFilteredTasks(JSON.parse(currentTasks));
         } else {
             setTasks([]);
         }
+
         setIsInitialized(true);
     }, []);
 
     useEffect(() => {
         if (isInitialized) {
             localStorage.setItem("tasks", JSON.stringify(tasks));
+            setFilteredTasks([...tasks].sort((a, b) => a.id - b.id));
         }
     }, [tasks, isInitialized]);
 
