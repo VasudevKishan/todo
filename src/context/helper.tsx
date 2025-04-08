@@ -3,6 +3,8 @@ export type Theme = "light" | "dark";
 export interface ThemeContextProps {
     theme: Theme;
     toggleTheme: () => void;
+    isSidebarVisible: boolean;
+    toggleSidebar: () => void;
 }
 
 export type UserAction = "edit" | "view" | "detail";

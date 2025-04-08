@@ -10,13 +10,20 @@ export const ThemeProvider: React.FC<{children: ReactNode}> = ({children}) => {
     const toggleTheme = () => {
         setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
     };
+    const [isSidebarVisible, setSidebarVisible] = useState(false);
+
+    const toggleSidebar = () => {
+        setSidebarVisible(!isSidebarVisible);
+    };
 
     useEffect(() => {
         document.querySelector("html")?.setAttribute("data-theme", theme);
     }, [theme]);
 
     return (
-        <ThemeContext.Provider value={{theme, toggleTheme}}>
+        <ThemeContext.Provider
+            value={{theme, toggleTheme, isSidebarVisible, toggleSidebar}}
+        >
             {children}
         </ThemeContext.Provider>
     );

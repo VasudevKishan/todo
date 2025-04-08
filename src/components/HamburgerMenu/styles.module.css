@@ -21,3 +21,9 @@
 .icon.active .line2 {
     transform: rotate(-45deg) translateY(-10px);
 }
+
+@media (min-width: 769px) {
+    .icon {
+        display: none; /* Hide the HamburgerMenu on screens larger than 768px */
+    }
+}

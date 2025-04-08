@@ -7,7 +7,7 @@ import {useTheme} from "../hooks/useTheme";
 type filterTypes = "All" | "Starred";
 
 const SideBar: React.FC = () => {
-    const {toggleTheme} = useTheme();
+    const {toggleTheme, isSidebarVisible} = useTheme();
     const [activeFilter, setActiveFilter] = useState<filterTypes>("All");
 
     const handleFilterClick = (filterName: filterTypes) => {
@@ -15,7 +15,11 @@ const SideBar: React.FC = () => {
         console.log("All todos");
     };
     return (
-        <aside className={styles.container}>
+        <aside
+            className={`${styles.container} ${
+                isSidebarVisible ? styles.visible : styles.hidden
+            }`}
+        >
             <div className={styles.filters}>
                 <div className={styles.filterTitleGroup}>
                     <h2>Filters</h2>

@@ -6,6 +6,7 @@ import {useCurrentAction} from "../hooks/useCurrentAction";
 import {useTasks} from "../hooks/useTasks";
 import {TaskItem} from "../components/TaskItem.tsx";
 import {Task} from "../context/helper.tsx";
+import {useTheme} from "../hooks/useTheme.tsx";
 
 const TodoContainer: React.FC = forwardRef<HTMLDivElement>((_, ref) => {
     const {changeAction} = useCurrentAction();
@@ -24,6 +25,7 @@ const TodoContainer: React.FC = forwardRef<HTMLDivElement>((_, ref) => {
     const [taskTitle, setTaskTitle] = useState<string>("");
     const [taskDescription, setTaskDescription] = useState<string>("");
     const [taskStarred, setTaskStarred] = useState<boolean>(false);
+    const {isSidebarVisible} = useTheme();
 
     const [animate, setAnimate] = useState<boolean>(false);
     useEffect(() => {
@@ -55,7 +57,12 @@ const TodoContainer: React.FC = forwardRef<HTMLDivElement>((_, ref) => {
     };
 
     return (
-        <main className={styles.container} ref={ref}>
+        <main
+            className={`${styles.container} ${
+                isSidebarVisible ? styles.blurred : ""
+            }`}
+            ref={ref}
+        >
             <div className={` ${styles.slide} ${styles["add-task"]}`}>
                 <h2 className={styles.title}>Add Task</h2>
                 <form onSubmit={handleFormSubmit}>
