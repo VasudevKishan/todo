@@ -49,6 +49,19 @@ const SideBar: React.FC = () => {
                     />
                 </div>
             </div>
+            <div className={styles.profileLinks}>
+                <a
+                    href="https://github.com/VasudevKishan/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="/github-mark.svg"
+                        alt="GitHub"
+                        className={styles.githubIcon}
+                    />
+                </a>
+            </div>
         </aside>
     );
 };
