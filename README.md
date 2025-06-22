@@ -2,4 +2,4 @@
 
 This project is created for learning Vite + React + Typescript
 
-Main branch is deployed in - https://vasudev-todo.netlify.app/
+The main branch is deployed on Netlify. URL- https://vasudev-todo.netlify.app/

@@ -33,7 +33,7 @@
     background-color: var(--card);
 }
 
-.toggle:checked + .label .ball {
+.toggle.checked + .label .ball {
     /* border: 2px red solid; */
     left: 3px;
 }

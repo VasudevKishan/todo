@@ -8,7 +8,7 @@ import {useTasks} from "../hooks/useTasks";
 type filterTypes = "All" | "Starred";
 
 const SideBar: React.FC = () => {
-    const {toggleTheme, isSidebarVisible, toggleSidebar} = useTheme();
+    const {toggleTheme, isSidebarVisible, toggleSidebar, theme} = useTheme();
     const [activeFilter, setActiveFilter] = useState<filterTypes>("All");
     const {clearFilter, filterByStarred} = useTasks();
 
@@ -32,7 +32,10 @@ const SideBar: React.FC = () => {
             <div className={styles.filters}>
                 <div className={styles.filterTitleGroup}>
                     <h2>Filters</h2>
-                    <Toggle action={toggleTheme} />
+                    <Toggle
+                        action={toggleTheme}
+                        selected={theme === "dark" ? false : true}
+                    />
                 </div>
                 <div className={styles.filterList}>
                     <FilterTitle
@@ -48,6 +51,19 @@ const SideBar: React.FC = () => {
                         isActive={activeFilter === "Starred"}
                     />
                 </div>
+            </div>
+            <div className={styles.profileLinks}>
+                <a
+                    href="https://github.com/VasudevKishan/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="/github-mark.svg"
+                        alt="GitHub"
+                        className={styles.githubIcon}
+                    />
+                </a>
             </div>
         </aside>
     );

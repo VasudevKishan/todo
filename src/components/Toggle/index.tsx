@@ -3,14 +3,15 @@ import styles from "./styles.module.css";
 
 interface ToggleProps {
     action: () => void;
+    selected: boolean;
 }
 
-const Toggle: React.FC<ToggleProps> = ({action}) => {
+const Toggle: React.FC<ToggleProps> = ({action, selected}) => {
     return (
         <div className={styles.toggleContainer}>
             <input
                 type="checkbox"
-                className={styles.toggle}
+                className={`${styles.toggle} ${selected ? styles.checked : ""}`}
                 onChange={action}
                 id="toggle"
             />
