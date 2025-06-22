@@ -1,69 +1,73 @@
 .container {
-    /* border: 2px yellow solid; */
-    background-color: var(--card);
-    border-radius: 25px;
-    width: 30%;
-    min-width: 150px;
-    padding: 25px;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
-        rgba(0, 0, 0, 0.1) 0px 2px 4px 0px;
-    display: flex;
-    flex-direction: column;
+  /* border: 2px yellow solid; */
+  background-color: var(--card);
+  border-radius: 25px;
+  width: 30%;
+  min-width: 150px;
+  padding: 25px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
+    rgba(0, 0, 0, 0.1) 0px 2px 4px 0px;
+  display: flex;
+  flex-direction: column;
 }
 
 .filterTitleGroup {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1.2rem;
 }
 
 .filterTitleGroup h2 {
-    color: var(--primary);
-    font-size: 2rem;
-    font-weight: 400;
+  color: var(--primary);
+  font-size: 2rem;
+  font-weight: 400;
 }
 
 .filterList {
-    /* border: 2px red solid; */
-    display: flex;
-    flex-direction: column;
+  /* border: 2px red solid; */
+  display: flex;
+  flex-direction: column;
 }
 
 .filterList > * {
-    margin-bottom: 0.75rem;
-    transition: 0.2s ease-in-out;
+  margin-bottom: 0.75rem;
+  transition: 0.2s ease-in-out;
 }
 
 @media (max-width: 768px) {
-    .container {
-        position: fixed;
-        top: 0;
-        left: 0;
+  .container {
+    position: fixed;
+    top: 0;
+    left: 0;
 
-        min-height: 60vh;
-        width: 250px;
-        transform: translateX(-200%); /* Hide the sidebar by default */
-        z-index: 1000;
-    }
-    .container.visible {
-        transform: translate(-50%, -55%); /* Slide the sidebar into view */
-        top: 50%;
-        left: 50%;
-    }
+    min-height: 60vh;
+    width: 250px;
+    transform: translateX(-200%); /* Hide the sidebar by default */
+    z-index: 1000;
+  }
+  .container.visible {
+    transform: translate(-50%, -55%); /* Slide the sidebar into view */
+    top: 50%;
+    left: 50%;
+  }
 
-    .container.hidden {
-        transform: translateX(-200%); /* Slide the sidebar out of view */
-    }
+  .container.hidden {
+    transform: translateX(-200%); /* Slide the sidebar out of view */
+  }
 }
 .profileLinks {
-    display: flex;
-    align-items: end;
-    justify-content: center;
-    margin-bottom: 0;
-    flex: 1;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  margin-bottom: 0;
+  flex: 1;
 }
 
 .profileLinks img {
-    width: 35px;
+  width: 35px;
+}
+
+.filterTitleGroup .highlight {
+  color: var(--dk-text);
 }
