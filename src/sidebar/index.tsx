@@ -4,11 +4,13 @@ import FilterTitle from '../components/FilterTitle';
 import Toggle from '../components/Toggle';
 import { useTheme } from '../hooks/useTheme';
 import { useTasks } from '../hooks/useTasks';
+import { useSidebar } from '../hooks/useSidebar';
 
 type filterTypes = 'All' | 'Starred';
 
 const SideBar: React.FC = () => {
-  const { toggleTheme, isSidebarVisible, toggleSidebar, theme } = useTheme();
+  const { toggleTheme, theme } = useTheme();
+  const { isSidebarVisible, toggleSidebar } = useSidebar();
   const [activeFilter, setActiveFilter] = useState<filterTypes>('All');
   const { clearFilter, filterByStarred } = useTasks();
 
