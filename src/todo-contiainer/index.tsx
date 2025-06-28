@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useState } from 'react';
+import React, { forwardRef } from 'react';
 import styles from './styles.module.css';
 import { useSidebar } from '../hooks/useSidebar.tsx';
 import TasksList from './tasks/index.tsx';
