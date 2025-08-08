@@ -7,16 +7,16 @@ import { SidebarProvider } from './context/SidebarContext';
 
 function App() {
   return (
-    <TaskProvider>
-      <ThemeProvider>
-        <SidebarProvider>
+    <ThemeProvider>
+      <SidebarProvider>
+        <TaskProvider>
           <>
             <Header />
             <ContentContainer />
           </>
-        </SidebarProvider>
-      </ThemeProvider>
-    </TaskProvider>
+        </TaskProvider>
+      </SidebarProvider>
+    </ThemeProvider>
   );
 }
 
