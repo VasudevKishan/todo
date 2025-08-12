@@ -4,10 +4,14 @@ import styles from '../styles.module.css';
 import { useTasks } from '../../hooks/useTasks';
 import { useCurrentAction } from '../../hooks/useCurrentAction';
 import { Task } from '../../context/helper';
+import { useTasksSlice } from '../../hooks/useTasksSlice.tsx';
 
 const AddTaskForm = () => {
   const [animate, setAnimate] = useState<boolean>(false);
-  const { addTask, userState, selectedTask } = useTasks();
+  // const { addTask, userState, selectedTask } = useTasks();
+  const { userState } = useTasks();
+  const { addTask, selectedTask, generateUniqueId, updateTask } =
+    useTasksSlice();
   const { changeAction } = useCurrentAction();
   const [taskTitle, setTaskTitle] = useState<string>('');
   const [taskDescription, setTaskDescription] = useState<string>('');
@@ -27,16 +31,28 @@ const AddTaskForm = () => {
       console.log('title is required');
       return;
     }
-    console.log('Task added : ', { taskTitle, taskDescription, taskStarred });
 
-    const newTask: Task = {
-      id: selectedTask.id,
-      title: taskTitle,
-      description: taskDescription,
-      starred: taskStarred,
-      completed: false,
-    };
-    addTask(newTask);
+    if (selectedTask) {
+      const currentTask: Task = {
+        id: selectedTask.id,
+        title: taskTitle,
+        description: taskDescription,
+        starred: taskStarred,
+        completed: false,
+      };
+      updateTask(currentTask);
+      console.log('Task updated : ', currentTask);
+    } else {
+      const newTask: Task = {
+        id: generateUniqueId(),
+        title: taskTitle,
+        description: taskDescription,
+        starred: taskStarred,
+        completed: false,
+      };
+      addTask(newTask);
+      console.log('Task added : ', newTask);
+    }
 
     changeAction('view');
   };
