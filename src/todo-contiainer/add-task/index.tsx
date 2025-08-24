@@ -5,16 +5,20 @@ import styles from '../styles.module.css';
 import { useCurrentAction } from '../../hooks/useCurrentAction';
 import { Task } from '../../context/helper';
 import { useTasksSlice } from '../../hooks/useTasksSlice.tsx';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 const AddTaskForm = () => {
   const [animate, setAnimate] = useState<boolean>(false);
-  const { addTask, selectedTask, generateUniqueId, updateTask } =
+  const { addTask, generateUniqueId, updateTask, getTaskbyID } =
     useTasksSlice();
-  const { changeAction } = useCurrentAction();
+  // const { changeAction } = useCurrentAction();
   const [taskTitle, setTaskTitle] = useState<string>('');
   const [taskDescription, setTaskDescription] = useState<string>('');
   const [taskStarred, setTaskStarred] = useState<boolean>(false);
 
+  const navigate = useNavigate();
+  const { taskId } = useParams();
+  const selectedTask = getTaskbyID(Number(taskId));
   useEffect(() => {
     if (selectedTask) {
       setTaskTitle(selectedTask.title || '');
@@ -51,12 +55,16 @@ const AddTaskForm = () => {
       addTask(newTask);
       console.log('Task added : ', newTask);
     }
+    navigate('/');
 
-    changeAction('view');
+    // changeAction('view');
   };
+  const { pathname } = useLocation();
   return (
     <div className={` ${styles.slide} ${styles['add-task']}`}>
-      <h2 className={styles.title}>Add Task</h2>
+      <h2 className={styles.title}>
+        {pathname.includes('edit') ? 'Edit' : 'Add'} Task
+      </h2>
       <form onSubmit={handleFormSubmit}>
         <div className={styles.taskForm}>
           <div>
@@ -102,8 +110,8 @@ const AddTaskForm = () => {
             className={styles.backBtn}
             varient='secondary'
             onClick={() => {
-              console.log('selected task: ', selectedTask);
-              changeAction('view');
+              navigate('/');
+              // changeAction('view');
             }}
           >
             <span className='material-icons'>arrow_back_ios</span>
