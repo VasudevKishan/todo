@@ -3,8 +3,6 @@ import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Task } from '../../context/helper';
 import { RootState } from '../store';
 
-// type Filters = 'all' | 'starred';
-
 interface TasksState {
   tasks: Task[];
   userState: 'new' | 'edit';
