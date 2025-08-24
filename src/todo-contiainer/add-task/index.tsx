@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ActionButton } from '../../components/ActionButton/ActionButton';
 import styles from '../styles.module.css';
-
-import { useCurrentAction } from '../../hooks/useCurrentAction';
 import { Task } from '../../context/helper';
 import { useTasksSlice } from '../../hooks/useTasksSlice.tsx';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
@@ -11,7 +9,6 @@ const AddTaskForm = () => {
   const [animate, setAnimate] = useState<boolean>(false);
   const { addTask, generateUniqueId, updateTask, getTaskbyID } =
     useTasksSlice();
-  // const { changeAction } = useCurrentAction();
   const [taskTitle, setTaskTitle] = useState<string>('');
   const [taskDescription, setTaskDescription] = useState<string>('');
   const [taskStarred, setTaskStarred] = useState<boolean>(false);
@@ -56,8 +53,6 @@ const AddTaskForm = () => {
       console.log('Task added : ', newTask);
     }
     navigate('/');
-
-    // changeAction('view');
   };
   const { pathname } = useLocation();
   return (
@@ -111,7 +106,6 @@ const AddTaskForm = () => {
             varient='secondary'
             onClick={() => {
               navigate('/');
-              // changeAction('view');
             }}
           >
             <span className='material-icons'>arrow_back_ios</span>

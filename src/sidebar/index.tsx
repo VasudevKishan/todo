@@ -12,7 +12,6 @@ const SideBar: React.FC = () => {
   const { toggleTheme, theme } = useTheme();
   const { isSidebarVisible, toggleSidebar } = useSidebar();
   const [activeFilter, setActiveFilter] = useState<filterTypes>('All');
-  // const { clearFilter, filterByStarred } = useTasks();
 
   const { clearFilter, filterByStarred } = useTasksSlice();
 
