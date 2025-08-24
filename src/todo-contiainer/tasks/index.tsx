@@ -1,20 +1,12 @@
 import { ActionButton } from '../../components/ActionButton/ActionButton';
 import { TaskItem } from '../../components/TaskItem.tsx';
-// import { useCurrentAction } from '../../hooks/useCurrentAction.tsx';
 import styles from '../styles.module.css';
 import { useTasksSlice } from '../../hooks/useTasksSlice.tsx';
 import { useNavigate } from 'react-router-dom';
 
 const TasksList = () => {
-  const {
-    filteredTasks,
-    toggleTaskCompletion,
-    removeTask,
-    // selectTask,
-    generateUniqueId,
-  } = useTasksSlice();
+  const { filteredTasks, toggleTaskCompletion, removeTask } = useTasksSlice();
 
-  // const { changeAction } = useCurrentAction();
   const navigate = useNavigate();
 
   return (
@@ -28,17 +20,13 @@ const TasksList = () => {
               task={task}
               onChecked={toggleTaskCompletion}
               onEdit={() => {
-                // selectTask(task.id);
                 navigate(`/edit/${task.id}`);
-                // changeAction('edit');
               }}
               onDelete={() => {
                 removeTask(task.id);
               }}
               onDetail={() => {
-                // selectTask(task.id);
                 navigate(`/detail/${task.id}`);
-                // changeAction('detail');
               }}
             />
           </li>
@@ -48,16 +36,7 @@ const TasksList = () => {
       <ActionButton
         varient='primary'
         onClick={() => {
-          const newTask = {
-            id: generateUniqueId(),
-            title: '',
-            description: '',
-            completed: false,
-            starred: false,
-          };
-          // selectTask(newTask.id);
           navigate('/new-task');
-          // changeAction('edit');
         }}
         className={styles.addBtn}
       >

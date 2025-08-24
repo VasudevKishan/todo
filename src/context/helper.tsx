@@ -10,13 +10,6 @@ export interface SidebarContextProps {
   toggleSidebar: () => void;
 }
 
-export type UserAction = 'edit' | 'view' | 'detail';
-
-export interface UserActionContextProps {
-  action: UserAction;
-  changeAction: (userAction: UserAction) => void;
-}
-
 export interface Task {
   id: number;
   title: string;

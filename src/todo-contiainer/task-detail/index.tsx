@@ -1,11 +1,9 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { ActionButton } from '../../components/ActionButton/ActionButton';
-import { useCurrentAction } from '../../hooks/useCurrentAction';
 import { useTasksSlice } from '../../hooks/useTasksSlice';
 import styles from '../styles.module.css';
 
 const TaskDetail = () => {
-  const { changeAction } = useCurrentAction();
   const { getTaskbyID } = useTasksSlice();
   const navigate = useNavigate();
   const { taskId } = useParams();
@@ -61,7 +59,6 @@ const TaskDetail = () => {
           varient='secondary'
           onClick={() => {
             navigate('/');
-            changeAction('view');
           }}
         >
           <span className='material-icons'>arrow_back_ios</span>

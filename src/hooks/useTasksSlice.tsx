@@ -46,7 +46,6 @@ export const useTasksSlice = () => {
   const clearFilter = () => dispatch(filterTasks('all'));
 
   return {
-    // tasks,
     filteredTasks,
     selectedTask,
     generateUniqueId,
