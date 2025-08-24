@@ -57,9 +57,7 @@ const taskSlice = createSlice({
       state.tasks = state.tasks.filter((t) => t.id !== action.payload);
       saveToLocalStorage(state.tasks);
     },
-    selectTask: (state, action: PayloadAction<number>) => {
-      state.selectedTaskId = action.payload;
-    },
+
     filterTasks: (state, action: PayloadAction<'all' | 'starred'>) => {
       state.filterQuery = action.payload;
     },
@@ -97,12 +95,15 @@ export const currentSelectedTask = (state: RootState): Task | null => {
     ) || null
   );
 };
+
+export const getTask = (state: RootState, taskId: number) => {
+  return state.taskList.tasks.find((task) => task.id === taskId);
+};
 export const {
   addTask,
   updateTask,
   toggleTaskCompletion,
   deleteTask,
-  selectTask,
   filterTasks,
 } = taskSlice.actions;
 
