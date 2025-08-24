@@ -7,10 +7,12 @@ import {
   toggleTaskCompletion,
   deleteTask,
   filterTasks,
-  selectTask,
   updateTask,
+  getTask,
 } from '../state/taskList/taskListSlice';
 import { Task } from '../context/helper';
+// import RootState from your store definition
+import { RootState } from '../state/store';
 
 export const useTasksSlice = () => {
   const dispatch = useDispatch();
@@ -19,6 +21,12 @@ export const useTasksSlice = () => {
   const filteredTasks: Task[] = useSelector(filteredTaskList);
 
   const selectedTask = useSelector(currentSelectedTask);
+  function getTaskbyID(taskId: number) {
+    const task: Task | undefined = useSelector((state: RootState) =>
+      getTask(state, taskId)
+    );
+    return task;
+  }
 
   const generateUniqueId = (): number => {
     return tasks.length > 0 ? Math.max(...tasks.map((task) => task.id)) + 1 : 1;
@@ -37,8 +45,6 @@ export const useTasksSlice = () => {
 
   const clearFilter = () => dispatch(filterTasks('all'));
 
-  const selectTaskByID = (id: number) => dispatch(selectTask(id));
-
   return {
     // tasks,
     filteredTasks,
@@ -48,8 +54,8 @@ export const useTasksSlice = () => {
     removeTask,
     filterByStarred,
     clearFilter,
-    selectTask: selectTaskByID,
     toggleTaskCompletion: updateTaskStatus,
     updateTask: updateTaskDetails,
+    getTaskbyID,
   };
 };
