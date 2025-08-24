@@ -1,23 +1,10 @@
 import { ActionButton } from '../../components/ActionButton/ActionButton';
 import { TaskItem } from '../../components/TaskItem.tsx';
 import { useCurrentAction } from '../../hooks/useCurrentAction.tsx';
-import { useTasks } from '../../hooks/useTasks.tsx';
-
 import styles from '../styles.module.css';
 import { useTasksSlice } from '../../hooks/useTasksSlice.tsx';
 
 const TasksList = () => {
-  // const {
-  //   filteredTasks,
-  //   toggleTaskCompletion,
-  //   removeTask,
-  //   selectTask,
-  //   generateUniqueId,
-  //   changeState,
-  // } = useTasks();
-
-  const { changeState } = useTasks();
-
   const {
     filteredTasks,
     toggleTaskCompletion,
@@ -25,10 +12,6 @@ const TasksList = () => {
     selectTask,
     generateUniqueId,
   } = useTasksSlice();
-
-  // const { tasks: filteredTasks } = useSelector(
-  //   (state: RootState) => state.taskList
-  // );
 
   const { changeAction } = useCurrentAction();
 
@@ -44,7 +27,6 @@ const TasksList = () => {
               onChecked={toggleTaskCompletion}
               onEdit={() => {
                 selectTask(task.id);
-                changeState('edit');
                 changeAction('edit');
               }}
               onDelete={() => {
@@ -70,7 +52,6 @@ const TasksList = () => {
             starred: false,
           };
           selectTask(newTask.id);
-          changeState('new');
           changeAction('edit');
         }}
         className={styles.addBtn}

@@ -24,17 +24,3 @@ export interface Task {
   completed: boolean;
   starred: boolean;
 }
-
-export interface TaskContextProps {
-  filteredTasks: Task[];
-  selectedTask: Task;
-  addTask: (task: Task) => void;
-  removeTask: (id: number) => void;
-  toggleTaskCompletion: (id: number) => void;
-  generateUniqueId: () => number;
-  selectTask: (task: Task) => void;
-  userState: 'new' | 'edit';
-  changeState: (state: 'new' | 'edit') => void;
-  filterByStarred: () => void;
-  clearFilter: () => void;
-}
