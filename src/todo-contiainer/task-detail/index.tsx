@@ -1,12 +1,10 @@
 import { ActionButton } from '../../components/ActionButton/ActionButton';
 import { useCurrentAction } from '../../hooks/useCurrentAction';
-import { useTasks } from '../../hooks/useTasks';
 import { useTasksSlice } from '../../hooks/useTasksSlice';
 import styles from '../styles.module.css';
 
 const TaskDetail = () => {
   const { changeAction } = useCurrentAction();
-  // const { selectedTask } = useTasks();
   const { selectedTask } = useTasksSlice();
   return (
     <div

@@ -1,15 +1,13 @@
 import { useEffect, useState } from 'react';
 import { ActionButton } from '../../components/ActionButton/ActionButton';
 import styles from '../styles.module.css';
-import { useTasks } from '../../hooks/useTasks';
+
 import { useCurrentAction } from '../../hooks/useCurrentAction';
 import { Task } from '../../context/helper';
 import { useTasksSlice } from '../../hooks/useTasksSlice.tsx';
 
 const AddTaskForm = () => {
   const [animate, setAnimate] = useState<boolean>(false);
-  // const { addTask, userState, selectedTask } = useTasks();
-  const { userState } = useTasks();
   const { addTask, selectedTask, generateUniqueId, updateTask } =
     useTasksSlice();
   const { changeAction } = useCurrentAction();
@@ -104,7 +102,7 @@ const AddTaskForm = () => {
             className={styles.backBtn}
             varient='secondary'
             onClick={() => {
-              console.log('add new task');
+              console.log('selected task: ', selectedTask);
               changeAction('view');
             }}
           >
@@ -115,7 +113,7 @@ const AddTaskForm = () => {
             varient='primary'
             type='submit'
           >
-            {userState === 'edit' ? 'Update' : 'Add'}
+            {selectedTask ? 'Update' : 'Add'}
           </ActionButton>
         </div>
       </form>
