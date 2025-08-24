@@ -1,74 +1,81 @@
 .item input {
-    display: none;
+  display: none;
 }
 
 .item {
-    width: 100%;
-    height: 2.5rem;
-    background: var(--component);
-    margin-bottom: 0.75rem;
-    position: relative;
-    display: flex;
-    align-items: center;
-    border-radius: 10px;
+  width: 100%;
+  height: 2.5rem;
+  background: var(--component);
+  margin-bottom: 0.75rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
 }
 
 .item label {
-    flex: 1;
-    cursor: pointer;
+  flex: 1;
+  cursor: pointer;
 }
 
 .item:hover {
-    background: var(--component-s);
+  background: var(--component-s);
 }
 
 .item.strikeThrough {
-    color: var(--dk-subtext);
-    background: var(--card);
+  color: var(--dk-subtext);
+  background: var(--card);
 }
 
 .item.strikeThrough label {
-    text-decoration: line-through;
+  text-decoration: line-through;
 }
 
 .actionIcons {
-    display: flex;
-    margin: 1rem;
-    justify-content: flex-end;
-    gap: 0.5rem;
-    right: 0;
-    color: var(--dk-subtext);
+  display: flex;
+  margin: 1rem;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  right: 0;
+  color: var(--dk-subtext);
 }
 .actionIcons > * {
-    font-size: 1.1rem;
+  font-size: 1.1rem;
 }
 
 .notStarred {
-    display: none;
+  display: none;
 }
 
 .item:hover .notStarred {
-    display: block;
+  display: block;
 }
 
 .editIcon {
-    display: none;
-    cursor: pointer;
+  display: none;
+  cursor: pointer;
 }
 
 .item:hover .editIcon {
-    display: block;
+  display: block;
 }
 
 .editIcon:hover,
 .delete:hover {
-    transform: scale(1.2);
-    color: var(--primary);
+  transform: scale(1.2);
+  color: var(--primary);
+  cursor: pointer;
 }
 
 .check {
-    cursor: pointer;
-    font-size: 1.1rem;
-    margin: 1rem;
-    color: var(--dk-subtext);
+  cursor: pointer;
+  font-size: 1.1rem;
+  margin: 1rem;
+  color: var(--dk-subtext);
+}
+
+.taskLabel {
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
