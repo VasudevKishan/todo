@@ -1,0 +1,39 @@
+.dropdown {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.button {
+  color: var(--dk-subtext);
+  border: 0;
+  border-radius: 8px;
+  display: flex;
+  font-size: 14px;
+  align-items: center;
+  padding: 8px;
+  font-weight: 400;
+  background-color: var(--component);
+}
+
+.menu {
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  overflow-y: scroll;
+  background: var(--card);
+  border: 2px solid var(--component);
+  border-radius: 8px;
+  max-height: 10rem;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.menu::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.item {
+  padding: 1rem;
+}

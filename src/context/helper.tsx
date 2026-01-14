@@ -11,9 +11,13 @@ export interface SidebarContextProps {
 }
 
 export interface Task {
-  id: number;
+  id: string;
   title: string;
-  description?: string;
-  completed: boolean;
+  description: string;
   starred: boolean;
+  completed: boolean;
+  projectId: string;
+  userId: string;
+  createdAt: string;
+  updatedAt: string;
 }
