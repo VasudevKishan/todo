@@ -3,7 +3,7 @@ name: Deploy Vite App to Netlify
 on:
   push:
     branches:
-      - main # Trigger deployment only on main branch
+      - Demo # Trigger deployment only on main branch
 
 jobs:
   build-and-deploy:
