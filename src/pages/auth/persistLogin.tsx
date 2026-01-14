@@ -54,7 +54,7 @@ const PersistLogin = () => {
     // console.log(isUninitialized);
     content = <Outlet />;
   }
-  return content ?? <Navigate to='/login' replace />;
+  return content;
 };
 
 export default PersistLogin;
