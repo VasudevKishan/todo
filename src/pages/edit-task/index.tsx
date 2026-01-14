@@ -56,10 +56,12 @@ const EditTaskForm = () => {
     register,
     handleSubmit,
     control,
+    clearErrors,
     formState: { errors },
     reset,
   } = useForm<EditTodoFormValues>({
-    mode: 'onChange',
+    mode: 'onBlur',
+    reValidateMode: 'onBlur',
     defaultValues: {
       title: '',
       description: '',
@@ -169,7 +171,17 @@ const EditTaskForm = () => {
             spellCheck='false'
             {...register('description', {
               required: 'Description is Required',
+              maxLength: {
+                value: 100,
+                message: 'Maximum 100 characters allowed',
+              },
+              onChange: () => {
+                if (errors.description) {
+                  clearErrors('description');
+                }
+              },
             })}
+            maxLength={101}
           />
           {typeof errors.description?.message === 'string' && (
             <>

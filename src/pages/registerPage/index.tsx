@@ -18,8 +18,12 @@ const RegisterPage: React.FC = () => {
   const {
     register,
     handleSubmit,
+    clearErrors,
     formState: { errors },
-  } = useForm<RegisterUserBodyType>({ mode: 'onChange' });
+  } = useForm<RegisterUserBodyType>({
+    mode: 'onBlur',
+    reValidateMode: 'onBlur',
+  });
   const navigate = useNavigate();
 
   const handleFormSubmit = async (data: RegisterUserBodyType) => {
@@ -41,8 +45,24 @@ const RegisterPage: React.FC = () => {
                 type='text'
                 id='username'
                 placeholder='Username'
-                {...register('username', { required: 'Username is Required' })}
+                {...register('username', {
+                  required: 'Username is Required',
+                  minLength: {
+                    value: 6,
+                    message: 'Minimum 6 characters required',
+                  },
+                  maxLength: {
+                    value: 12,
+                    message: 'Maximum 12 characters allowed',
+                  },
+                  onChange: () => {
+                    if (errors.username) {
+                      clearErrors('username');
+                    }
+                  },
+                })}
                 title='Enter your username'
+                maxLength={13}
               />
               <label htmlFor='username' style={{ display: 'none' }}>
                 Username
@@ -65,8 +85,18 @@ const RegisterPage: React.FC = () => {
                   value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
                   message: 'Invalid Email format',
                 },
+                maxLength: {
+                  value: 50,
+                  message: 'Maximum 50 characters allowed',
+                },
+                onChange: () => {
+                  if (errors.email) {
+                    clearErrors('email');
+                  }
+                },
               })}
               title='Enter your email'
+              maxLength={51}
             />
             {typeof errors.email?.message === 'string' && (
               <>
@@ -80,8 +110,29 @@ const RegisterPage: React.FC = () => {
               type='password'
               id='password'
               placeholder='Password'
-              {...register('password', { required: 'Password is Required' })}
+              {...register('password', {
+                required: 'Password is Required',
+                minLength: {
+                  value: 10,
+                  message: 'Minimum 10 characters required',
+                },
+                maxLength: {
+                  value: 25,
+                  message: 'Maximum 25 characters allowed',
+                },
+                pattern: {
+                  value: /^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{10,25}$/,
+                  message:
+                    'Password must be 10–50 characters long and include an uppercase letter, a number, and a special character',
+                },
+                onChange: () => {
+                  if (errors.password) {
+                    clearErrors('password');
+                  }
+                },
+              })}
               title='Enter your password'
+              maxLength={26}
             />
             {typeof errors.password?.message === 'string' && (
               <>

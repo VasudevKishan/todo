@@ -36,10 +36,12 @@ const AddTaskForm = () => {
   const {
     register,
     handleSubmit,
+    clearErrors,
     control,
     formState: { errors },
   } = useForm<createTodoBodyType>({
-    mode: 'onChange',
+    mode: 'onBlur',
+    reValidateMode: 'onBlur',
   });
 
   const handleFormSubmit = async (data: createTodoBodyType) => {
@@ -72,7 +74,23 @@ const AddTaskForm = () => {
               type='text'
               id='taskTitle'
               placeholder='Title'
-              {...register('title', { required: 'Title is Required' })}
+              {...register('title', {
+                required: 'Title is Required',
+                minLength: {
+                  value: 4,
+                  message: 'Minimum 4 characters required',
+                },
+                maxLength: {
+                  value: 50,
+                  message: 'Maximum 50 characters allowed',
+                },
+                onChange: () => {
+                  if (errors.title) {
+                    clearErrors('title');
+                  }
+                },
+              })}
+              maxLength={51}
             />
             <label htmlFor='taskTitle' style={{ display: 'none' }}>
               Title
@@ -116,7 +134,17 @@ const AddTaskForm = () => {
             spellCheck='false'
             {...register('description', {
               required: 'Description is Required',
+              maxLength: {
+                value: 100,
+                message: 'Maximum 100 characters allowed',
+              },
+              onChange: () => {
+                if (errors.description) {
+                  clearErrors('description');
+                }
+              },
             })}
+            maxLength={101}
           />
           {typeof errors.description?.message === 'string' && (
             <>
