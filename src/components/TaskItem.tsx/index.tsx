@@ -4,7 +4,7 @@ import styles from './styles.module.css';
 
 interface TaskItemProps {
   task: Task;
-  onChecked: (id: number) => void;
+  onChecked: (id: string) => void;
   onEdit: () => void;
   onDetail: () => void;
   onDelete: () => void;
@@ -21,7 +21,7 @@ export const TaskItem: React.FC<TaskItemProps> = ({
     <div
       className={`${styles.item} ${task.completed ? styles.strikeThrough : ''}`}
     >
-      <input type='checkbox' id={task.id.toString()} />
+      <input type='checkbox' id={task.id} />
       <span
         className={`material-icons ${styles.check}`}
         onClick={() => {
@@ -30,11 +30,7 @@ export const TaskItem: React.FC<TaskItemProps> = ({
       >
         {task.completed ? 'check_circle' : 'radio_button_unchecked'}
       </span>
-      <label
-        htmlFor={task.id.toString()}
-        onClick={onDetail}
-        className={styles.taskLabel}
-      >
+      <label htmlFor={task.id} onClick={onDetail} className={styles.taskLabel}>
         {task.title}
       </label>
 
