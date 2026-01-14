@@ -23,16 +23,6 @@ import RequireAuth from './pages/auth/RequireAuth';
 function App() {
   useTitle('Todo');
   return (
-    // <ThemeProvider>
-    //   <SidebarProvider>
-    //     <Provider store={store}>
-    //       <BrowserRouter>
-    //         <Header />
-    //         <ContentContainer />
-    //       </BrowserRouter>
-    //     </Provider>
-    //   </SidebarProvider>
-    // </ThemeProvider>
     <ThemeProvider>
       <SidebarProvider>
         <Provider store={store}>
@@ -40,8 +30,8 @@ function App() {
             <Header />
             <Routes>
               {/* Public Routes */}
-              <Route path='login' element={<LoginPage />} />
-              <Route path='register' element={<RegisterPage />} />
+              <Route path='/login' element={<LoginPage />} />
+              <Route path='/register' element={<RegisterPage />} />
               {/* Protected Routes */}
               <Route element={<PersistLogin />}>
                 <Route
