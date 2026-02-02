@@ -28,7 +28,7 @@ const AddTaskForm = () => {
       pollingInterval: 15000,
       refetchOnFocus: true,
       refetchOnMountOrArgChange: true,
-    }
+    },
   );
 
   useTitle('Todo | New Todo');
@@ -38,6 +38,7 @@ const AddTaskForm = () => {
     handleSubmit,
     clearErrors,
     control,
+    trigger,
     formState: { errors },
   } = useForm<createTodoBodyType>({
     mode: 'onBlur',
@@ -162,23 +163,38 @@ const AddTaskForm = () => {
             rules={{
               required: 'Project is required',
             }}
-            render={({ field }) =>
-              isProjectsLoading || data === undefined ? (
+            render={({ field }) => {
+              return isProjectsLoading || data === undefined ? (
                 <Loader />
               ) : (
-                <Dropdown value={field.value} onChange={field.onChange}>
+                <Dropdown
+                  value={
+                    data.projects.find((p) => p._id === field.value)
+                      ? {
+                          value: field.value,
+                          label: data.projects.find(
+                            (p) => p._id === field.value,
+                          )!.projectName,
+                        }
+                      : null
+                  }
+                  onChange={(opt) => field.onChange(opt?.value ?? null)}
+                  onBlur={field.onBlur}
+                >
                   <Dropdown.Button>Select</Dropdown.Button>
+
                   <Dropdown.Menu>
                     <Dropdown.DefaultItem>Select</Dropdown.DefaultItem>
-                    {data?.projects.map((project) => (
-                      <Dropdown.Item key={project._id} value={project._id}>
-                        {project.projectName}
-                      </Dropdown.Item>
+                    {data.projects.map((p) => (
+                      <Dropdown.Item
+                        key={p._id}
+                        option={{ value: p._id, label: p.projectName }}
+                      />
                     ))}
                   </Dropdown.Menu>
                 </Dropdown>
-              )
-            }
+              );
+            }}
           />
 
           {typeof errors.projectId?.message === 'string' && (
