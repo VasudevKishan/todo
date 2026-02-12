@@ -38,7 +38,6 @@ const AddTaskForm = () => {
     handleSubmit,
     clearErrors,
     control,
-    trigger,
     formState: { errors },
   } = useForm<createTodoBodyType>({
     mode: 'onBlur',
