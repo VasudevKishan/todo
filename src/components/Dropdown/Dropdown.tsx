@@ -90,7 +90,7 @@ const Dropdown: React.FC<DropdownProps> & {
 ======================= */
 
 const DropdownButton: React.FC<DropdownButtonProps> = ({ children }) => {
-  const { open, setOpen, value, onBlur } = useDropdown();
+  const { open, setOpen, value } = useDropdown();
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   const DropdownBtnClickHandler = () => {
