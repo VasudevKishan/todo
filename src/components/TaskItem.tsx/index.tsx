@@ -44,18 +44,20 @@ export const TaskItem: React.FC<TaskItemProps> = ({
           </span>
         ) : (
           <>
+            {task.starred && (
+              <span
+                className={`material-icons ${styles.starIcon}
+                    ${task.starred ? styles.starred : styles.notStarred}
+                `}
+              >
+                {task.starred ? 'star' : 'star_border'}
+              </span>
+            )}
             <span
               className={`material-icons ${styles.editIcon}`}
               onClick={onEdit}
             >
               mode
-            </span>
-            <span
-              className={`material-icons ${styles.starIcon}
-                    ${task.starred ? styles.starred : styles.notStarred}
-                `}
-            >
-              {task.starred ? 'star' : 'star_border'}
             </span>
           </>
         )}
