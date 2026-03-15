@@ -18,10 +18,10 @@ const TaskDetail = () => {
       todoId: taskId ?? '',
     },
     {
-      pollingInterval: 15000,
+      pollingInterval: 30000,
       refetchOnFocus: true,
       refetchOnMountOrArgChange: true,
-    }
+    },
   );
 
   const projectName = useSelector(selectProjectNameById(todo?.projectId));

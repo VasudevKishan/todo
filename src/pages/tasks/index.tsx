@@ -4,7 +4,6 @@ import styles from '../styles.module.css';
 import { useNavigate } from 'react-router-dom';
 import {
   useDeleteTodoMutation,
-  useGetMyTodosQuery,
   useUpdateTodoMutation,
 } from '../../app/todo/todoApiSlice.ts';
 import { useSelector } from 'react-redux';
@@ -12,6 +11,7 @@ import { getCurrentFilter } from '../../app/todo/todoSlice.ts';
 import { Task } from '../../context/helper.tsx';
 import useTitle from '../../hooks/useTitle.tsx';
 import Loader from '../../components/Loader/index.tsx';
+import { useGetMyTodosSubscriber } from '../../hooks/useGetMyTodosSubscriber.tsx';
 
 // Todo: Portals for error messages
 const TasksList = () => {
@@ -32,16 +32,13 @@ const TasksList = () => {
     value: filters.value ?? undefined,
   };
   // console.log(queryParams);
+
   const {
     data: myTodos,
     isLoading,
     isError,
     error,
-  } = useGetMyTodosQuery(queryParams, {
-    pollingInterval: 15000,
-    refetchOnFocus: true,
-    refetchOnMountOrArgChange: true,
-  });
+  } = useGetMyTodosSubscriber(queryParams);
 
   useTitle('Todo');
   const navigate = useNavigate();
