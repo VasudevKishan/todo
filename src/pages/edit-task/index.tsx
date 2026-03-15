@@ -10,10 +10,10 @@ import {
   updateTodoBodyType,
 } from '../../app/todo/todoApiSlice.ts';
 
-import { useGetMyProjectsQuery } from '../../app/project/projectsApiSlice.ts';
 import Dropdown2 from '../../components/Dropdown2/Dropdown2.tsx';
 import useTitle from '../../hooks/useTitle.tsx';
 import Loader from '../../components/Loader/index.tsx';
+import { useGetMyProjectSubscriber } from '../../hooks/useGetMyProjectsSubscriber.tsx';
 
 interface EditTodoFormValues {
   title: string;
@@ -38,19 +38,12 @@ const EditTaskForm = () => {
     todoId: taskId ?? '',
   });
   const [taskStarred, setTaskStarred] = useState<boolean>(
-    todo?.starred || false
+    todo?.starred || false,
   );
 
   const [updateTodo, { isLoading, isError }] = useUpdateTodoMutation();
 
-  const { data, isLoading: isProjectsLoading } = useGetMyProjectsQuery(
-    undefined,
-    {
-      pollingInterval: 15000,
-      refetchOnFocus: true,
-      refetchOnMountOrArgChange: true,
-    }
-  );
+  const { data, isLoading: isProjectsLoading } = useGetMyProjectSubscriber();
 
   const {
     register,

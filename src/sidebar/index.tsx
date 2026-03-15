@@ -9,23 +9,17 @@ import { useSidebar } from '../hooks/useSidebar';
 
 import { useSendLogoutMutation } from '../app/auth/authApiSlice';
 import { Link, useNavigate } from 'react-router-dom';
-import { useGetMyProjectsQuery } from '../app/project/projectsApiSlice';
 import { setFilter, clearTodosFilter } from '../app/todo/todoSlice';
 import { useDispatch } from 'react-redux';
 import Loader from '../components/Loader';
+import { useGetMyProjectSubscriber } from '../hooks/useGetMyProjectsSubscriber';
 
 type filterTypes = 'All' | 'Starred' | 'Project';
 
 const SideBar: React.FC = () => {
   const [sendLogout, { isLoading, isSuccess }] = useSendLogoutMutation();
-  const { data, isLoading: isProjectsLoading } = useGetMyProjectsQuery(
-    undefined,
-    {
-      pollingInterval: 15000,
-      refetchOnFocus: false,
-      refetchOnMountOrArgChange: true,
-    }
-  );
+
+  const { data, isLoading: isProjectsLoading } = useGetMyProjectSubscriber();
   const navigate = useNavigate();
   const { toggleTheme, theme } = useTheme();
   const { isSidebarVisible, toggleSidebar } = useSidebar();
