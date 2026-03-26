@@ -12,14 +12,21 @@ import { Link, useNavigate } from 'react-router-dom';
 import { setFilter, clearTodosFilter } from '../app/todo/todoSlice';
 import { useDispatch } from 'react-redux';
 import Loader from '../components/Loader';
-import { useGetMyProjectSubscriber } from '../hooks/useGetMyProjectsSubscriber';
+import { useGetMyProjectsQuery } from '../app/project/projectsApiSlice';
 
 type filterTypes = 'All' | 'Starred' | 'Project';
 
 const SideBar: React.FC = () => {
   const [sendLogout, { isLoading, isSuccess }] = useSendLogoutMutation();
 
-  const { data, isLoading: isProjectsLoading } = useGetMyProjectSubscriber();
+  // const { data, isLoading: isProjectsLoading } = useGetMyProjectSubscriber();
+  const { data, isLoading: isProjectsLoading } = useGetMyProjectsQuery(
+    undefined,
+    {
+      refetchOnFocus: false,
+      refetchOnMountOrArgChange: true,
+    },
+  );
   const navigate = useNavigate();
   const { toggleTheme, theme } = useTheme();
   const { isSidebarVisible, toggleSidebar } = useSidebar();

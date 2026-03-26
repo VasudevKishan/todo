@@ -13,7 +13,7 @@ import {
 import Dropdown2 from '../../components/Dropdown2/Dropdown2.tsx';
 import useTitle from '../../hooks/useTitle.tsx';
 import Loader from '../../components/Loader/index.tsx';
-import { useGetMyProjectSubscriber } from '../../hooks/useGetMyProjectsSubscriber.tsx';
+import { useGetMyProjectsQuery } from '../../app/project/projectsApiSlice.ts';
 
 interface EditTodoFormValues {
   title: string;
@@ -43,7 +43,14 @@ const EditTaskForm = () => {
 
   const [updateTodo, { isLoading, isError }] = useUpdateTodoMutation();
 
-  const { data, isLoading: isProjectsLoading } = useGetMyProjectSubscriber();
+  // const { data, isLoading: isProjectsLoading } = useGetMyProjectSubscriber();
+  const { data, isLoading: isProjectsLoading } = useGetMyProjectsQuery(
+    undefined,
+    {
+      refetchOnFocus: false,
+      refetchOnMountOrArgChange: true,
+    },
+  );
 
   const {
     register,

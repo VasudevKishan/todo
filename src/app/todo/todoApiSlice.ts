@@ -63,20 +63,43 @@ export interface updateTodoArgs {
 
 export const todoApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getMyTodos: builder.query<getMyTodosResponse, getTodosQueryParams | null>({
-      query: (params) => ({
+    // getMyTodos: builder.query<getMyTodosResponse, getTodosQueryParams | null>({
+    //   query: (params) => ({
+    //     url: '/mytodos',
+    //     params: params ?? undefined,
+    //   }),
+    //   transformResponse: (
+    //     response: getMyTodosApiResponse,
+    //   ): getMyTodosResponse => ({
+    //     todos: response.todos.map(
+    //       ({ _id, ...rest }): Todo => ({
+    //         id: _id,
+    //         ...rest,
+    //       }),
+    //     ),
+    //   }),
+    //   providesTags: (result) =>
+    //     result
+    //       ? [
+    //           ...result.todos.map(({ id }) => ({
+    //             type: 'Todo' as const,
+    //             id,
+    //           })),
+    //           { type: 'Todo', id: 'LIST' },
+    //         ]
+    //       : [{ type: 'Todo', id: 'LIST' }],
+    // }),
+    getMyTodos: builder.query<getMyTodosResponse, void>({
+      query: () => ({
         url: '/mytodos',
-        params: params ?? undefined,
       }),
       transformResponse: (
-        response: getMyTodosApiResponse
+        response: getMyTodosApiResponse,
       ): getMyTodosResponse => ({
-        todos: response.todos.map(
-          ({ _id, ...rest }): Todo => ({
-            id: _id,
-            ...rest,
-          })
-        ),
+        todos: response.todos.map(({ _id, ...rest }) => ({
+          id: _id,
+          ...rest,
+        })),
       }),
       providesTags: (result) =>
         result
@@ -118,6 +141,27 @@ export const todoApiSlice = apiSlice.injectEndpoints({
         method: 'PATCH',
         body: { ...data },
       }),
+      // Optimistic updates - updates cache before and renders UI while API call is being made. If API call fails then UI reverts back it its original data.
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        const patchResult = dispatch(
+          todoApiSlice.util.updateQueryData(
+            'getMyTodos',
+            undefined,
+            (draft) => {
+              const todo = draft.todos.find((t) => t.id === arg.todoId);
+              if (todo) {
+                Object.assign(todo, arg.data);
+              }
+            },
+          ),
+        );
+
+        try {
+          await queryFulfilled;
+        } catch {
+          patchResult.undo();
+        }
+      },
       invalidatesTags: (_result, _error, arg) => [
         { type: 'Todo', id: arg.todoId },
       ],

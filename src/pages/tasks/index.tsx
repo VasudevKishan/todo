@@ -10,8 +10,7 @@ import { useSelector } from 'react-redux';
 import { getCurrentFilter } from '../../app/todo/todoSlice.ts';
 import { Task } from '../../context/helper.tsx';
 import useTitle from '../../hooks/useTitle.tsx';
-import Loader from '../../components/Loader/index.tsx';
-import { useGetMyTodosSubscriber } from '../../hooks/useGetMyTodosSubscriber.tsx';
+import { useFilteredTodos } from '../../hooks/useFilteredTodos.tsx';
 
 // Todo: Portals for error messages
 const TasksList = () => {
@@ -22,23 +21,36 @@ const TasksList = () => {
   //   value: value ?? undefined,
   // };
   // console.log(filterObj);
-  const [updateTodo, { isLoading: isUpdateTodoLoading }] =
-    useUpdateTodoMutation();
-  const [deleteTodo, { isLoading: isDeleteTodoLoading }] =
-    useDeleteTodoMutation();
+  // const [updateTodo, { isLoading: isUpdateTodoLoading }] =
+  //   useUpdateTodoMutation();
+  // const [deleteTodo, { isLoading: isDeleteTodoLoading }] =
+  //   useDeleteTodoMutation();
 
-  const queryParams = {
-    filterBy: filters.filterBy ?? undefined,
-    value: filters.value ?? undefined,
-  };
+  // const queryParams = {
+  //   filterBy: filters.filterBy ?? undefined,
+  //   value: filters.value ?? undefined,
+  // };
   // console.log(queryParams);
+  // const {
+  //   data: myTodos,
+  //   isLoading,
+  //   isError,
+  //   error,
+  // } = useGetMyTodosSubscriber(queryParams);
 
-  const {
-    data: myTodos,
-    isLoading,
-    isError,
-    error,
-  } = useGetMyTodosSubscriber(queryParams);
+  const [updateTodo] = useUpdateTodoMutation();
+  const [deleteTodo] = useDeleteTodoMutation();
+  const filterQuery =
+    filters.filterBy && filters.value
+      ? { type: filters.filterBy, value: filters.value }
+      : undefined;
+  const { data: myTodos, isError, error } = useFilteredTodos(filterQuery);
+  // const {
+  //   data: myTodos,
+  //   isLoading,
+  //   isError,
+  //   error,
+  // } = useGetMyTodosQuery(queryParams);
 
   useTitle('Todo');
   const navigate = useNavigate();
@@ -64,12 +76,14 @@ const TasksList = () => {
   if (isError) {
     console.log(error);
     content = <div className={styles.loaderContainer}>No Tasks found!</div>;
-  } else if (isLoading || isDeleteTodoLoading || isUpdateTodoLoading)
-    content = <Loader />;
+  }
+  // i -  Removed due to optimistic UI Updates from RTK query
+  // else if (isLoading || isDeleteTodoLoading || isUpdateTodoLoading)
+  //   content = <Loader />;
   else {
     content = (
       <ul className={styles.TaskList}>
-        {myTodos?.todos.map((task) => (
+        {myTodos.map((task) => (
           <li key={task.id}>
             <TaskItem
               task={task}
