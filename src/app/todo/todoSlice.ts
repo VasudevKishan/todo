@@ -2,13 +2,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 
 export interface filterState {
-  filterBy: string | null;
-  value: string | null;
+  filterBy?: string;
+  value?: string;
 }
 
 const initialState: filterState = {
-  filterBy: null,
-  value: null,
+  filterBy: undefined,
+  value: undefined,
 };
 
 const todoSlice = createSlice({
@@ -20,8 +20,8 @@ const todoSlice = createSlice({
       state.value = action.payload.value;
     },
     clearTodosFilter: (state) => {
-      state.filterBy = null;
-      state.value = null;
+      state.filterBy = undefined;
+      state.value = undefined;
     },
   },
 });

@@ -11,7 +11,7 @@ import {
 } from '../../app/todo/todoApiSlice.ts';
 import useTitle from '../../hooks/useTitle.tsx';
 import Loader from '../../components/Loader/index.tsx';
-import { useGetMyProjectSubscriber } from '../../hooks/useGetMyProjectsSubscriber.tsx';
+import { useGetMyProjectsQuery } from '../../app/project/projectsApiSlice.ts';
 
 const AddTaskForm = () => {
   const [animate, setAnimate] = useState<boolean>(false);
@@ -22,7 +22,14 @@ const AddTaskForm = () => {
 
   const [createTodo, { isLoading, isError }] = useCreateTodoMutation();
 
-  const { data, isLoading: isProjectsLoading } = useGetMyProjectSubscriber();
+  // const { data, isLoading: isProjectsLoading } = useGetMyProjectSubscriber();
+  const { data, isLoading: isProjectsLoading } = useGetMyProjectsQuery(
+    undefined,
+    {
+      refetchOnFocus: false,
+      refetchOnMountOrArgChange: true,
+    },
+  );
 
   useTitle('Todo | New Todo');
 
