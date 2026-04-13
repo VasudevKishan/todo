@@ -20,7 +20,7 @@ const AddTaskForm = () => {
 
   const navigate = useNavigate();
 
-  const [createTodo, { isLoading, isError }] = useCreateTodoMutation();
+  const [createTodo, { isLoading, isError, error }] = useCreateTodoMutation();
 
   // const { data, isLoading: isProjectsLoading } = useGetMyProjectSubscriber();
   const { data, isLoading: isProjectsLoading } = useGetMyProjectsQuery(
@@ -46,9 +46,13 @@ const AddTaskForm = () => {
 
   const handleFormSubmit = async (data: createTodoBodyType) => {
     // handle form data here, e.g., send to API or update state
-
-    await createTodo(data).unwrap();
-    if (!isError) navigate('/');
+    try {
+      await createTodo(data).unwrap();
+      if (!isError) navigate('/');
+    } catch (err) {
+      const errorObj = err as { data: { message: string } };
+      console.error(errorObj.data.message);
+    }
   };
 
   let content;
@@ -77,12 +81,12 @@ const AddTaskForm = () => {
               {...register('title', {
                 required: 'Title is Required',
                 minLength: {
-                  value: 4,
-                  message: 'Minimum 4 characters required',
+                  value: 3,
+                  message: 'Minimum 3 characters required',
                 },
                 maxLength: {
-                  value: 50,
-                  message: 'Maximum 50 characters allowed',
+                  value: 40,
+                  message: 'Maximum 40 characters allowed',
                 },
                 onChange: () => {
                   if (errors.title) {
@@ -90,7 +94,7 @@ const AddTaskForm = () => {
                   }
                 },
               })}
-              maxLength={51}
+              maxLength={40}
             />
             <label htmlFor='taskTitle' style={{ display: 'none' }}>
               Title
@@ -133,10 +137,10 @@ const AddTaskForm = () => {
             placeholder='Description...'
             spellCheck='false'
             {...register('description', {
-              required: 'Description is Required',
+              // required: 'Description is Required',
               maxLength: {
-                value: 100,
-                message: 'Maximum 100 characters allowed',
+                value: 200,
+                message: 'Maximum 200 characters allowed',
               },
               onChange: () => {
                 if (errors.description) {
@@ -144,7 +148,7 @@ const AddTaskForm = () => {
                 }
               },
             })}
-            maxLength={101}
+            maxLength={200}
           />
           {typeof errors.description?.message === 'string' && (
             <>
@@ -200,6 +204,12 @@ const AddTaskForm = () => {
             <>
               <p className={styles.errorMessage}>{errors.projectId.message}</p>
             </>
+          )}
+          <br />
+          {isError && (
+            <div className={styles.errorBox}>
+              {(error as { data: { message: string } }).data.message}
+            </div>
           )}
           <br />
         </div>

@@ -14,7 +14,8 @@ interface RegisterUserBodyType {
 }
 
 const RegisterPage: React.FC = () => {
-  const [registerUser, { isLoading, isError }] = useRegisterUserMutation();
+  const [registerUser, { isLoading, isError, error }] =
+    useRegisterUserMutation();
   const {
     register,
     handleSubmit,
@@ -27,8 +28,15 @@ const RegisterPage: React.FC = () => {
   const navigate = useNavigate();
 
   const handleFormSubmit = async (data: RegisterUserBodyType) => {
-    await registerUser(data).unwrap();
-    if (!isError) navigate('/new-project');
+    try {
+      // const payload =
+      await registerUser(data).unwrap();
+      // console.log(payload);
+      navigate('/new-project');
+    } catch (err) {
+      const errorObj = err as { data: { message: string } };
+      console.error(errorObj.data.message);
+    }
   };
 
   useTitle('Todo | Register');
@@ -48,12 +56,12 @@ const RegisterPage: React.FC = () => {
                 {...register('username', {
                   required: 'Username is Required',
                   minLength: {
-                    value: 6,
-                    message: 'Minimum 6 characters required',
+                    value: 4,
+                    message: 'Minimum 4 characters required',
                   },
                   maxLength: {
-                    value: 12,
-                    message: 'Maximum 12 characters allowed',
+                    value: 15,
+                    message: 'Maximum 15 characters allowed',
                   },
                   onChange: () => {
                     if (errors.username) {
@@ -62,7 +70,7 @@ const RegisterPage: React.FC = () => {
                   },
                 })}
                 title='Enter your username'
-                maxLength={13}
+                maxLength={15}
               />
               <label htmlFor='username' style={{ display: 'none' }}>
                 Username
@@ -83,7 +91,7 @@ const RegisterPage: React.FC = () => {
                 required: 'Email is Required',
                 pattern: {
                   value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                  message: 'Invalid Email format',
+                  message: 'Invalid email format',
                 },
                 maxLength: {
                   value: 50,
@@ -96,7 +104,7 @@ const RegisterPage: React.FC = () => {
                 },
               })}
               title='Enter your email'
-              maxLength={51}
+              maxLength={50}
             />
             {typeof errors.email?.message === 'string' && (
               <>
@@ -113,17 +121,22 @@ const RegisterPage: React.FC = () => {
               {...register('password', {
                 required: 'Password is Required',
                 minLength: {
-                  value: 10,
-                  message: 'Minimum 10 characters required',
+                  value: 8,
+                  message: 'Minimum 8 characters required',
                 },
                 maxLength: {
                   value: 25,
                   message: 'Maximum 25 characters allowed',
                 },
                 pattern: {
-                  value: /^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{10,25}$/,
-                  message:
-                    'Password must be 10–50 characters long and include an uppercase letter, a number, and a special character',
+                  value:
+                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&])[A-Za-z\d@.#$!%*?&]{8,25}$/,
+                  message: `Password must contain - \n
+                  8-25 characters long,
+                  an uppercase letter,
+                  a lowercase letter,
+                  a number,
+                  and a special character`,
                 },
                 onChange: () => {
                   if (errors.password) {
@@ -132,7 +145,7 @@ const RegisterPage: React.FC = () => {
                 },
               })}
               title='Enter your password'
-              maxLength={26}
+              maxLength={25}
             />
             {typeof errors.password?.message === 'string' && (
               <>
@@ -146,6 +159,12 @@ const RegisterPage: React.FC = () => {
                 Login here
               </span>
             </p>
+            <br />
+            {isError && (
+              <div className={styles.errorBox}>
+                {(error as { data: { message: string } }).data.message}
+              </div>
+            )}
             <br />
             <div>
               <ActionButton varient='primary' type='submit'>

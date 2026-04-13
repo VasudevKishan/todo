@@ -82,11 +82,10 @@ const LoginPage: React.FC = () => {
           </div>
           <br />
           {errMsg !== '' && (
-            <>
-              <p className={styles.errorMessage}>{errMsg}</p> <br />
-            </>
+            <div className={styles.errorBox} style={{ marginBottom: '0.5rem' }}>
+              {errMsg}
+            </div>
           )}
-
           <p>
             New user?{' '}
             <span className={styles.link} onClick={() => navigate('/register')}>
