@@ -7,12 +7,10 @@ import { todoApiSlice } from '../../app/todo/todoApiSlice';
 const Prefetch = () => {
   useEffect(() => {
     console.log('Subscribing');
-    const todo = store.dispatch(
-      todoApiSlice.endpoints.getMyTodos.initiate(null)
-    );
+    const todo = store.dispatch(todoApiSlice.endpoints.getMyTodos.initiate());
 
     const projects = store.dispatch(
-      projectsApiSlice.endpoints.getMyProjects.initiate()
+      projectsApiSlice.endpoints.getMyProjects.initiate(),
     );
 
     return () => {
