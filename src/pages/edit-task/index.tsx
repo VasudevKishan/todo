@@ -41,7 +41,7 @@ const EditTaskForm = () => {
     todo?.starred || false,
   );
 
-  const [updateTodo, { isLoading, isError }] = useUpdateTodoMutation();
+  const [updateTodo, { isLoading, isError, error }] = useUpdateTodoMutation();
 
   // const { data, isLoading: isProjectsLoading } = useGetMyProjectSubscriber();
   const { data, isLoading: isProjectsLoading } = useGetMyProjectsQuery(
@@ -71,33 +71,31 @@ const EditTaskForm = () => {
   });
 
   const handleFormSubmit = async (data: EditTodoFormValues) => {
-    // handle form data here, e.g., send to API or update state
-    // console.log(data);
-    if (!taskId) {
-      // console.log('Error, no parama');
-    } else {
-      // const reqBody: updateTodoBodyType = {
-      //   title: data.title,
-      //   description: data.description || '',
-      //   starred: data.starred,
-      //   projectId: data.projectId || undefined,
-      // };
+    try {
+      // handle form data here, e.g., send to API or update state
+      // console.log(data);
+      if (!taskId) {
+        // console.log('Error, no parama');
+      } else {
+        const reqBody: updateTodoBodyType = {};
+        if (data.title !== todo?.title) reqBody.title = data.title;
+        if (data.description !== todo?.description)
+          reqBody.description = data.description;
+        if (data.starred !== todo?.starred) reqBody.starred = data.starred;
+        if (data.projectId !== todo?.projectId)
+          reqBody.projectId = data.projectId || undefined;
 
-      const reqBody: updateTodoBodyType = {};
-      if (data.title !== todo?.title) reqBody.title = data.title;
-      if (data.description !== todo?.description)
-        reqBody.description = data.description;
-      if (data.starred !== todo?.starred) reqBody.starred = data.starred;
-      if (data.projectId !== todo?.projectId)
-        reqBody.projectId = data.projectId || undefined;
+        await updateTodo({
+          todoId: taskId,
+          data: reqBody,
+        }).unwrap();
+      }
 
-      await updateTodo({
-        todoId: taskId,
-        data: reqBody,
-      }).unwrap();
+      if (!isError) navigate('/');
+    } catch (err) {
+      const errorObj = err as { data: { message: string } };
+      console.error(errorObj.data.message);
     }
-
-    if (!isError) navigate('/');
   };
 
   useEffect(() => {
@@ -127,7 +125,23 @@ const EditTaskForm = () => {
               type='text'
               id='taskTitle'
               placeholder='Title'
-              {...register('title', { required: 'Title is Required' })}
+              {...register('title', {
+                required: 'Title is Required',
+                minLength: {
+                  value: 3,
+                  message: 'Minimum 3 characters required',
+                },
+                maxLength: {
+                  value: 40,
+                  message: 'Maximum 40 characters allowed',
+                },
+                onChange: () => {
+                  if (errors.title) {
+                    clearErrors('title');
+                  }
+                },
+              })}
+              maxLength={40}
             />
             <label htmlFor='taskTitle' style={{ display: 'none' }}>
               Title
@@ -170,10 +184,10 @@ const EditTaskForm = () => {
             placeholder='Description...'
             spellCheck='false'
             {...register('description', {
-              required: 'Description is Required',
+              // required: 'Description is Required',
               maxLength: {
-                value: 100,
-                message: 'Maximum 100 characters allowed',
+                value: 200,
+                message: 'Maximum 200 characters allowed',
               },
               onChange: () => {
                 if (errors.description) {
@@ -181,7 +195,7 @@ const EditTaskForm = () => {
                 }
               },
             })}
-            maxLength={101}
+            maxLength={200}
           />
           {typeof errors.description?.message === 'string' && (
             <>
@@ -217,6 +231,12 @@ const EditTaskForm = () => {
             <>
               <p className={styles.errorMessage}>{errors.projectId.message}</p>
             </>
+          )}
+          <br />
+          {isError && (
+            <div className={styles.errorBox}>
+              {(error as { data: { message: string } }).data.message}
+            </div>
           )}
           <br />
         </div>

@@ -187,8 +187,19 @@ ul::-webkit-scrollbar {
 }
 
 .errorMessage {
-  color: red;
-  text-decoration: underline;
+  margin-top: 0.25rem;
+  color: var(--text-error);
+}
+
+.errorBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--text-error);
+  border: var(--text-error) 0.02rem solid;
+  padding: 0.5rem;
+  background: var(--component);
+  border-radius: 5px;
 }
 
 @keyframes rotateAndScale {

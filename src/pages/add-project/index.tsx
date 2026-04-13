@@ -22,18 +22,23 @@ const AddProjectForm = () => {
 
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      // const { message } =
-      await createProject({ projectName }).unwrap();
-      // console.log(message);
-      // Create a popup with success message
-      navigate('/');
-    } catch (err: any) {
-      if (!err.status) setErrMsg('No Server Response');
-      else if (err.status === 400) setErrMsg('Missing Project Name');
-      else if (err.status === 409) setErrMsg('Duplicate Project Name');
-      else setErrMsg('Error - ' + err.data?.message);
-    }
+    // console.log(projectName.length);
+    if (projectName.length === 0) setErrMsg('Required');
+    else if (projectName.length < 3 || projectName.length > 10) {
+      setErrMsg('Project name must be 3 - 10 characters');
+    } else
+      try {
+        // const { message } =
+        await createProject({ projectName }).unwrap();
+        // console.log(message);
+        // Create a popup with success message
+        navigate('/');
+      } catch (err: any) {
+        if (!err.status) setErrMsg('No Server Response');
+        else if (err.status === 400) setErrMsg('Missing Project Name');
+        else if (err.status === 409) setErrMsg('Duplicate Project Name');
+        else setErrMsg('Error - ' + err.data?.message);
+      }
   };
 
   let content;
@@ -56,7 +61,7 @@ const AddProjectForm = () => {
             name='projectName'
             ref={projectNameRef}
             id='projectName'
-            required
+            maxLength={10}
             value={projectName}
             onChange={(e) => setProjectName(e.target.value)}
             placeholder='Project Name'
